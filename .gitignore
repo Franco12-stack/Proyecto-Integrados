@@ -21,3 +21,7 @@ build/
 
 # Logs
 *.log
+
+# Credenciales - NUNCA subir
+src/config/Secrets.h
+server/.env

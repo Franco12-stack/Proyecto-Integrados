@@ -14,10 +14,19 @@ static void waitOk(Input& in) {
 void receive(Display& d, Input& in) {
     d.clear();
     d.header("IR Receive");
-    d.footer("OK=salir");
-    d.log("Apunta el mando");
-    d.log("al receptor IR.");
+    d.log("El Cardputer NO trae");
+    d.log("receptor IR de fabrica.");
+    d.log("Solo tiene emisor.");
+    d.log("");
+    d.log("Para esta funcion hace");
+    d.log("falta un TSOP1838");
+    d.log("externo en el puerto");
+    d.log("de expansion (EXT).");
+    d.log("");
+    d.log("OK para salir.");
+    waitOk(in);
 
+#if PIN_IR_RX >= 0
     IRrecv recv(PIN_IR_RX, 1024 /*buffer*/, 50 /*timeout ms*/, true);
     recv.enableIRIn();
     decode_results res;
@@ -35,6 +44,7 @@ void receive(Display& d, Input& in) {
         delay(20);
     }
     recv.disableIRIn();
+#endif
 }
 
 void tvBGone(Display& d, Input& in) {

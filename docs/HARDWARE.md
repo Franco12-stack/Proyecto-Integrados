@@ -1,80 +1,68 @@
-# Hardware y conexionado
+# Hardware: M5Stack Cardputer
 
-## Lista de materiales (BOM)
+## Specs (de fábrica, todo ya armado)
 
-| Componente              | Función               | Precio aprox. | Esencial |
-|-------------------------|-----------------------|---------------|----------|
-| ESP32 DevKit V1 (38p)   | MCU                   | 5-8 €         | Sí       |
-| Display ST7789 240x240  | UI                    | 6-10 €        | Sí       |
-| 5x botones tactiles 6mm | Input                 | 1 €           | Sí       |
-| 5x resistencias 10kΩ    | Pull-ups (3 de 5 btn) | <1 €          | Sí       |
-| LED IR + TSOP1838       | Infrarrojos           | 1-2 €         | IR       |
-| Modulo RC522            | RFID 13.56MHz         | 2-3 €         | RFID     |
-| Modulo CC1101 (433MHz)  | SubGHz                | 3-5 €         | SubGHz   |
-| PN532                   | NFC avanzado          | 5-8 €         | Opc.     |
-| Bateria LiPo 1S + TP4056| Portabilidad          | 5 €           | Opc.     |
-| Protoboard 830 puntos   | Prototipado           | 3 €           | Sí       |
+| Componente | Detalle |
+|---|---|
+| SoC | ESP32-S3FN8, dual-core Xtensa LX7 @ 240MHz |
+| Flash | 8 MB |
+| Pantalla | ST7789V2 1.14", 240×135, IPS |
+| Teclado | 56 teclas (4×14) |
+| Micrófono | SPM1423 MEMS, I2S |
+| Altavoz | amplificador NS4150B |
+| IR | 1 emisor (NO tiene receptor de fábrica) |
+| IMU | BM1270 (no se usa en este proyecto) |
+| Batería | 1750 mAh con carga integrada |
+| Expansión | conectores HY2.0-4P y EXT2.54-14P |
 
-## Asignación de pines (`src/config/Pins.h`)
+No hace falta soldar nada para WiFi, BLE, IR (emisor), pantalla,
+teclado o batería — viene completo.
 
-### Display ST7789 (VSPI)
-```
-ESP32     ST7789
-GPIO23 -> MOSI / SDA
-GPIO18 -> SCK / SCL
-GPIO 5 -> CS
-GPIO 2 -> DC
-GPIO 4 -> RST
-GPIO15 -> BLK (backlight)
-3V3    -> VCC
-GND    -> GND
-```
+## Pines confirmados (fijos de fábrica)
 
-### Botones
-| Botón | GPIO | Pull-up         |
-|-------|------|-----------------|
-| UP    | 32   | Interno         |
-| DOWN  | 33   | Interno         |
-| LEFT  | 35   | **Externo 10k** |
-| RIGHT | 34   | **Externo 10k** |
-| OK    | 36   | **Externo 10k** |
+No se pueden modificar — están soldados así en la placa. Documentados
+en [`src/config/Pins.h`](../src/config/Pins.h).
 
-Conexión: pin GPIO ↔ botón ↔ GND. La pull-up va de GPIO a 3V3 (10kΩ).
-GPIO 32/33 usan pull-up interno (`INPUT_PULLUP`).
+| Función | GPIO |
+|---|---|
+| IR TX | 44 |
+| Mic BCK / WS / DATA | 41 / 43 / 46 |
+| Speaker BCK / WS / DATA | 41 / 43 / 42 |
+| Display BL/RST/DC/MOSI/SCK/CS | 38/33/34/35/36/37 (manejado por M5GFX) |
 
-### HSPI compartido (RC522 + CC1101)
-```
-GPIO14 -> SCK
-GPIO12 -> MISO
-GPIO13 -> MOSI
-GPIO27 -> CS RC522
-GPIO25 -> CS CC1101
-GPIO26 -> GDO0 CC1101
-```
+## Lo que NO trae y cómo agregarlo
 
-### I2C (PN532)
-```
-GPIO21 -> SDA
-GPIO22 -> SCL
-```
+### Receptor IR (para "aprender" controles remotos)
+Necesitás un **TSOP1838** externo conectado a un GPIO libre del
+puerto de expansión (EXT2.54-14P). Una vez cableado, definí
+`PIN_IR_RX` en `Pins.h` con ese GPIO.
 
-### IR
-```
-GPIO17 -> LED IR (con transistor NPN + R 220Ω en serie)
-GPIO16 -> Out del TSOP1838
-```
+### RFID/NFC (RC522 o PN532)
+Se conecta por el puerto de expansión: RC522 por SPI, PN532 por I2C.
+Activá `FEATURE_RFID` en `Pins.h` y ajustá los pines en
+`PIN_EXT_1`/`PIN_EXT_2` según cómo lo cables.
 
-## Notas de montaje
+### SubGHz (CC1101)
+También por el puerto de expansión, SPI. Activá `FEATURE_SUBGHZ`.
 
-- **GPIO 6-11** están reservados para la flash SPI interna del ESP32:
-  **no los uses jamás**.
-- **GPIO 34-39** son input-only y NO tienen pull-up interno.
-- Si compartes el bus HSPI entre RC522 y CC1101, asegúrate de que
-  los CS están **siempre** en estado HIGH cuando no se usan.
-- Para el LED IR conviene usar transistor de switch (2N2222 o BC547)
-  con la base alimentada desde el GPIO; el GPIO solo no da corriente.
+## Librería de software
 
-## Modificar el pinout
+El proyecto usa la librería oficial `M5Cardputer` (que internamente
+usa `M5Unified` + `M5GFX`), no `TFT_eSPI` ni GPIO crudo para
+botones — la matriz de teclado y el driver de pantalla ya vienen
+resueltos por M5Stack, no hace falta reinventarlos.
 
-Todo está en `src/config/Pins.h` y en el bloque `build_flags` de
-`platformio.ini` (este último para `TFT_eSPI`).
+## Convención de teclas para navegar el menú
+
+| Tecla | Función |
+|---|---|
+| `;` | Arriba |
+| `.` | Abajo |
+| `,` | Izquierda |
+| `/` | Derecha |
+| Enter | OK / Confirmar |
+| `` ` `` | Atrás |
+| Espacio (mantener) | Hablar con el asistente de IA |
+
+Es la misma convención que usa el firmware Bruce, así que si después
+probás otro firmware en el mismo dispositivo, ya conocés los controles.

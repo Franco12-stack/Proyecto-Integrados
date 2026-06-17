@@ -1,4 +1,4 @@
-#include <Arduino.h>
+#include <M5Cardputer.h>
 
 #include "config/Pins.h"
 #include "core/Display.h"
@@ -19,6 +19,9 @@
 #endif
 #if FEATURE_SUBGHZ
 #include "modules/subghz/SubGhzModule.h"
+#endif
+#if FEATURE_VOICE
+#include "modules/voice/VoiceModule.h"
 #endif
 
 static Display display;
@@ -92,49 +95,67 @@ static void rfidMenu() {
 #endif
 
 // ---------- Menu principal ----------
+// Nota: esta lista refleja el hardware del M5Cardputer. Si agregas
+// RFID/SubGHz por el puerto de expansion, suma su entrada aqui.
 
 static void mainMenu() {
     const char* const items[] = {
-        "WiFi", "Bluetooth", "Infrarrojos", "RFID/NFC", "SubGHz", "Acerca",
+        "WiFi",
+        "Bluetooth",
+        "Infrarrojos",
+#if FEATURE_VOICE
+        "Asistente IA",
+#endif
+        "Acerca",
     };
-    const uint8_t sel = menu.run("MULTITOOL", items, 6);
-    switch (sel) {
+    const uint8_t count = sizeof(items) / sizeof(items[0]);
+    const uint8_t sel = menu.run("MULTITOOL", items, count);
+
+    uint8_t idx = 0;
 #if FEATURE_WIFI
-        case 0: wifiMenu(); break;
+    if (sel == idx++) { wifiMenu(); return; }
+#else
+    idx++;
 #endif
 #if FEATURE_BLE
-        case 1: bleMenu(); break;
+    if (sel == idx++) { bleMenu(); return; }
+#else
+    idx++;
 #endif
 #if FEATURE_IR
-        case 2: irMenu(); break;
+    if (sel == idx++) { irMenu(); return; }
+#else
+    idx++;
 #endif
-#if FEATURE_RFID
-        case 3: rfidMenu(); break;
+#if FEATURE_VOICE
+    if (sel == idx++) { voice_module::pushToTalk(display, input); return; }
 #endif
-#if FEATURE_SUBGHZ
-        case 4: subghz_module::info(display, input); break;
-#endif
-        case 5: {
-            display.clear();
-            display.header("Acerca");
-            display.log("ESP32 Multitool");
-            display.log("Proyecto Integrados");
-            display.log("v0.1.0");
-            display.log("Uso etico unicamente.");
-            display.log("OK para salir.");
-            while (input.poll() != Button::OK) delay(10);
-            break;
-        }
-        default: break;
+    if (sel == idx++) {
+        display.clear();
+        display.header("Acerca");
+        display.log("ESP32 Multitool");
+        display.log("Proyecto Integrados");
+        display.log("v0.2.0 - Cardputer");
+        display.log("Uso etico unicamente.");
+        display.log("OK para salir.");
+        while (input.poll() != Button::OK) delay(10);
+        return;
     }
 }
 
 void setup() {
+    auto cfg = M5.config();
+    M5Cardputer.begin(cfg, true);
+
     Serial.begin(115200);
     delay(200);
     Serial.println("[Multitool] boot");
+
     display.begin();
     input.begin();
+#if FEATURE_VOICE
+    voice_module::begin();
+#endif
 
     display.clear();
     display.header("MULTITOOL");

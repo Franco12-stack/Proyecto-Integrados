@@ -1,8 +1,9 @@
 # ESP32 Multitool — Proyecto Integrados
 
-Multitool tipo "Flipper Zero" basado en ESP32 DevKit. Pensado como
-proyecto educativo de hardware/seguridad. **Solo para uso ético** —
-ver [`docs/ETHICS.md`](docs/ETHICS.md).
+Multitool tipo "Flipper Zero" con asistente de voz por IA, basado en
+**M5Stack Cardputer** (ESP32-S3). Proyecto educativo de
+hardware/seguridad. **Solo para uso ético** — ver
+[`docs/ETHICS.md`](docs/ETHICS.md).
 
 ## Funcionalidades
 
@@ -14,47 +15,72 @@ ver [`docs/ETHICS.md`](docs/ETHICS.md).
 | WiFi    | Evil twin                | ⛔ Stub (uso restringido)  |
 | BLE     | Scan de dispositivos     | ✅ Funcional               |
 | BLE     | BadBT / spam             | ⛔ Stub                    |
-| IR      | Receive                  | ✅ Funcional               |
-| IR      | TV-B-Gone                | 🟡 Base, falta tabla       |
-| RFID    | Read UID (MIFARE)        | ✅ Funcional               |
-| RFID    | Clone                    | ⛔ Stub                    |
-| SubGHz  | CC1101                   | 🟡 Info + stub             |
+| IR      | TV-B-Gone (emisor)       | ✅ Funcional               |
+| IR      | Receive                  | ⚠️ Requiere TSOP externo   |
+| RFID    | Read UID / Clone         | ⚠️ Requiere RC522 externo  |
+| SubGHz  | CC1101                   | ⚠️ Requiere módulo externo |
+| **Voz** | **Asistente con IA**     | ✅ **Funcional**           |
+
+## Asistente de voz
+
+Mantené apretada la barra espaciadora, hablá ("escaneá las redes
+wifi"), soltá — el dispositivo manda el audio a un backend propio
+que transcribe con Whisper y usa **Claude** para entender el pedido
+y ejecutar la acción. Solo puede disparar acciones seguras y
+predefinidas; nunca funciones ofensivas. Ver
+[`docs/VOICE_ASSISTANT.md`](docs/VOICE_ASSISTANT.md).
 
 ## Hardware
 
-- **MCU:** ESP32 DevKit V1 (38 pines)
-- **Display:** ST7789 240×240 SPI
-- **Input:** 5 botones (UP/DOWN/LEFT/RIGHT/OK)
-- **RFID:** RC522 (HSPI)
-- **NFC:** PN532 (I2C, opcional)
-- **SubGHz:** CC1101 (HSPI, opcional)
-- **IR:** LED IR + TSOP1838
+**M5Stack Cardputer** (ESP32-S3FN8) — viene armado de fábrica con
+pantalla, teclado de 56 teclas, emisor IR, micrófono, altavoz y
+batería. No hace falta soldar nada para las funciones básicas.
 
-Diagrama de conexionado en [`docs/HARDWARE.md`](docs/HARDWARE.md).
+Detalle de pines y cómo sumar RFID/SubGHz/receptor IR por el puerto
+de expansión en [`docs/HARDWARE.md`](docs/HARDWARE.md).
 
-## Build
+## Build del firmware
 
 Requiere [PlatformIO](https://platformio.org/) (extensión de VSCode o CLI):
 
 ```bash
+cp src/config/Secrets.h.example src/config/Secrets.h
+# completar WiFi + URL del backend + token en Secrets.h
+
 pio run                     # compila
 pio run --target upload     # flasheo por USB
 pio device monitor          # consola serie
 ```
+
+## Backend del asistente de voz
+
+Necesario solo si vas a usar el asistente de IA. Ver
+[`server/README.md`](server/README.md) para instalarlo local o en
+un VPS.
 
 ## Estructura
 
 ```
 src/
 ├── main.cpp              # menu loop
-├── config/Pins.h         # pinout central
-├── core/                 # Display, Input, Menu
+├── config/
+│   ├── Pins.h             # pinout central + feature flags
+│   └── Secrets.h.example  # plantilla de credenciales
+├── core/                  # Display, Input, Menu
 └── modules/
-    ├── wifi/             # scan, deauth detector, ...
-    ├── ble/              # scan
-    ├── ir/               # receive, TV-B-Gone
-    ├── rfid/             # UID read
-    └── subghz/           # CC1101 stub
+    ├── wifi/              # scan, deauth detector, ...
+    ├── ble/                # scan
+    ├── ir/                 # TV-B-Gone (emisor)
+    ├── rfid/               # UID read (requiere RC522 externo)
+    ├── subghz/             # CC1101 (requiere módulo externo)
+    └── voice/              # asistente de voz con IA
+server/
+├── main.py                # backend FastAPI: Whisper + Claude
+└── README.md               # como desplegarlo
+docs/
+├── HARDWARE.md
+├── VOICE_ASSISTANT.md
+└── ETHICS.md
 ```
 
 ## Activar/desactivar módulos
@@ -63,7 +89,7 @@ Edita `src/config/Pins.h`:
 
 ```cpp
 #define FEATURE_WIFI    1
-#define FEATURE_BLE     0   // desactivar
+#define FEATURE_VOICE   0   // desactivar el asistente de IA
 ```
 
 ## Licencia y uso

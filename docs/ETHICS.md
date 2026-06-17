@@ -5,6 +5,15 @@ Flipper son herramientas de **doble uso** — pueden investigar y
 proteger, o causar daño y violar la ley. Antes de usar cualquier
 módulo, lee esto.
 
+## Asistente de voz con IA
+
+El asistente de voz (ver [`VOICE_ASSISTANT.md`](VOICE_ASSISTANT.md))
+solo puede disparar un set fijo de acciones seguras y pasivas
+(`wifi_scan`, `wifi_deauth_detector`, `ble_scan`, `ir_tvbgone`,
+`about`). Las funciones ofensivas no están en esa lista, así que ni
+pidiéndolo por voz se pueden activar. Si pedís algo fuera de ese
+alcance, la IA responde que no y no ejecuta nada.
+
 ## Reglas
 
 1. **Solo opera en hardware/redes propias o con autorización escrita.**

@@ -1,64 +1,66 @@
 #include "Display.h"
-#include "../config/Pins.h"
 
 void Display::begin() {
-    pinMode(PIN_LED, OUTPUT);
-    digitalWrite(PIN_LED, LOW);
-    _tft.init();
-    _tft.setRotation(0);
-    _tft.fillScreen(TFT_BLACK);
-    _tft.setTextColor(TFT_WHITE, TFT_BLACK);
-    _tft.setTextSize(2);
+    auto& d = M5Cardputer.Display;
+    d.setRotation(1);
+    d.setTextSize(1);
+    d.fillScreen(TFT_BLACK);
+    d.setTextColor(TFT_WHITE, TFT_BLACK);
 }
 
-void Display::clear(uint16_t color) {
-    _tft.fillScreen(color);
+void Display::clear(uint32_t color) {
+    M5Cardputer.Display.fillScreen(color);
     _logY = 30;
 }
 
 void Display::header(const char* title) {
-    _tft.fillRect(0, 0, 240, 20, TFT_DARKGREEN);
-    _tft.setTextColor(TFT_WHITE, TFT_DARKGREEN);
-    _tft.setTextSize(2);
-    _tft.setCursor(4, 2);
-    _tft.print(title);
+    auto& d = M5Cardputer.Display;
+    d.fillRect(0, 0, d.width(), 18, TFT_DARKGREEN);
+    d.setTextColor(TFT_WHITE, TFT_DARKGREEN);
+    d.setTextSize(1);
+    d.setCursor(4, 4);
+    d.print(title);
 }
 
 void Display::footer(const char* hint) {
-    _tft.fillRect(0, 220, 240, 20, TFT_NAVY);
-    _tft.setTextColor(TFT_WHITE, TFT_NAVY);
-    _tft.setTextSize(1);
-    _tft.setCursor(4, 226);
-    _tft.print(hint);
+    auto& d = M5Cardputer.Display;
+    const int16_t y = d.height() - 14;
+    d.fillRect(0, y, d.width(), 14, TFT_NAVY);
+    d.setTextColor(TFT_WHITE, TFT_NAVY);
+    d.setTextSize(1);
+    d.setCursor(4, y + 2);
+    d.print(hint);
 }
 
 void Display::drawMenu(const char* const items[], uint8_t count, uint8_t selected) {
     clear();
     header("MULTITOOL");
-    _tft.setTextSize(2);
+    auto& d = M5Cardputer.Display;
+    d.setTextSize(1);
     for (uint8_t i = 0; i < count; ++i) {
-        const int16_t y = 30 + i * 22;
+        const int16_t y = 22 + i * 14;
         if (i == selected) {
-            _tft.fillRect(0, y - 2, 240, 22, TFT_DARKGREEN);
-            _tft.setTextColor(TFT_WHITE, TFT_DARKGREEN);
+            d.fillRect(0, y - 1, d.width(), 14, TFT_DARKGREEN);
+            d.setTextColor(TFT_WHITE, TFT_DARKGREEN);
         } else {
-            _tft.setTextColor(TFT_WHITE, TFT_BLACK);
+            d.setTextColor(TFT_WHITE, TFT_BLACK);
         }
-        _tft.setCursor(8, y);
-        _tft.print(items[i]);
+        d.setCursor(6, y);
+        d.print(items[i]);
     }
-    footer("UP/DOWN  OK=Enter");
+    footer(", / mover  Enter=OK  `=Atras");
 }
 
 void Display::log(const char* line) {
-    if (_logY > 200) {
+    auto& d = M5Cardputer.Display;
+    if (_logY > d.height() - 20) {
         clear();
         header("LOG");
-        _logY = 30;
+        _logY = 22;
     }
-    _tft.setTextSize(1);
-    _tft.setTextColor(TFT_GREEN, TFT_BLACK);
-    _tft.setCursor(4, _logY);
-    _tft.print(line);
+    d.setTextSize(1);
+    d.setTextColor(TFT_GREEN, TFT_BLACK);
+    d.setCursor(4, _logY);
+    d.print(line);
     _logY += 10;
 }
