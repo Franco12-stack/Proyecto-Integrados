@@ -66,6 +66,9 @@
 		<h1 class="js-product-name h4 mb-3" data-store="product-name-{{ product.id }}">{{ product.name }}</h1>
 
 		{{ component('nubesdk-slot', { type: "after_product_detail_name" }) }}
+
+		{# Leyenda de entrega en 48hs (segun lista de SKU) #}
+		{% include "snipplets/product/product-delivery-48hs.tpl" %}
 	{% endif %}
 
 
@@ -189,9 +192,6 @@
 			</a>
 		</div>
 	{% endif %}
-
-	{# Leyenda de entrega en 48hs (solo productos con tag "48hs") #}
-	{% include "snipplets/product/product-delivery-48hs.tpl" %}
 
 	{# Product form, includes: Variants, CTA and Shipping calculator #}
 
