@@ -1092,8 +1092,8 @@
 	display: inline-flex;
 	align-items: center;
 	gap: 8px;
-	background-color: #e6f4ea;
-	border: 1.5px solid #2e7d32;
+	background-color: #e8f0fe;
+	border: 1.5px solid #1565c0;
 	border-radius: 8px;
 	padding: 8px 14px;
 	margin-bottom: 16px;
@@ -1101,12 +1101,12 @@
 	font-size: 0.97em;
 }
 .delivery-48hs-icon {
-	color: #2e7d32;
+	color: #1565c0;
 	display: flex;
 	align-items: center;
 }
 .delivery-48hs-text {
-	color: #2e7d32;
+	color: #1565c0;
 }
 </style>
 {% endif %}
