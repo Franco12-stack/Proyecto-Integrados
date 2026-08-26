@@ -23,7 +23,25 @@
     <div class="js-swiper-mas-vendidos swiper-container">
       <div class="js-mv-grid swiper-wrapper flex-nowrap" id="mv-swiper-wrapper">
         {% for product in sections.primary.products %}
-          <div class="js-item-slide swiper-slide mv-slide" data-cat="{{ product.name | lower }}">
+          {%- set _n = product.name | lower -%}
+          {%- if 'placa de video' in _n or 'rtx' in _n or 'radeon rx' in _n or 'geforce' in _n or ' rx ' in _n -%}
+            {%- set _cat = 'placas' -%}
+          {%- elseif 'notebook' in _n or 'laptop' in _n -%}
+            {%- set _cat = 'notebooks' -%}
+          {%- elseif 'silla' in _n -%}
+            {%- set _cat = 'sillas' -%}
+          {%- elseif 'monitor' in _n -%}
+            {%- set _cat = 'monitores' -%}
+          {%- elseif 'mouse' in _n or 'teclado' in _n or 'auricular' in _n or 'headset' in _n or 'micr' in _n or 'webcam' in _n or 'joystick' in _n or 'gamepad' in _n -%}
+            {%- set _cat = 'perifericos' -%}
+          {%- elseif 'pc amd' in _n or 'pc intel' in _n or 'pc gamer' in _n or 'pc ryzen' in _n or 'computadora' in _n or 'desktop' in _n -%}
+            {%- set _cat = 'pcs' -%}
+          {%- elseif 'router' in _n or 'wifi' in _n or 'conectividad' in _n -%}
+            {%- set _cat = 'conectividad' -%}
+          {%- else -%}
+            {%- set _cat = '' -%}
+          {%- endif -%}
+          <div class="js-item-slide swiper-slide mv-slide" data-cat="{{ _cat }}">
             {% include 'snipplets/product-item.tpl' with {'slide_item': true, 'section_name': 'primary'} %}
           </div>
         {% endfor %}
@@ -99,25 +117,7 @@
   }
   initMVSwiper();
 
-  /* Detectar categoría desde el título del producto (evita problemas de scope en Twig) */
-  /* Mapea el nombre del producto al tab de categoría */
-  function mapCat(name) {
-    name = (name || '').toLowerCase();
-    if (/placa de video|rtx|radeon rx|\brx \d|geforce/.test(name)) return 'placas';
-    if (/notebook|laptop/.test(name)) return 'notebooks';
-    if (/\bpc\b.*(amd|intel|ryzen|gamer|core i)|(amd|intel|ryzen|core i).*\bpc\b|computadora|desktop|\btorre\b|\bpc gamer\b/.test(name)) return 'pcs';
-    if (/silla/.test(name)) return 'sillas';
-    if (/\bmonitor\b/.test(name)) return 'monitores';
-    if (/\bmouse\b|\bteclado\b|auricular|headset|micr[oó]fono|kit de teclado|webcam/.test(name)) return 'perifericos';
-    if (/conectividad|router|\bswitch\b|\bwifi\b|red inal/.test(name)) return 'conectividad';
-    return '';
-  }
-
   var slides = document.querySelectorAll('.mv-slide');
-  slides.forEach(function(slide) {
-    slide.setAttribute('data-cat', mapCat(slide.getAttribute('data-cat')));
-  });
-
   var tabs = document.querySelectorAll('.mv-tab');
   tabs.forEach(function(tab) {
     tab.addEventListener('click', function() {
