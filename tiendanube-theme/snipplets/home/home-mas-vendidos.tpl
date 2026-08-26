@@ -103,12 +103,13 @@
   /* Mapea el nombre del producto al tab de categoría */
   function mapCat(name) {
     name = (name || '').toLowerCase();
-    if (/placa de video|rtx|radeon rx|geforce/.test(name)) return 'placas';
+    if (/placa de video|rtx|radeon rx|\brx \d|geforce/.test(name)) return 'placas';
     if (/notebook|laptop/.test(name)) return 'notebooks';
-    if (/\bpc amd\b|\bpc intel\b|\bpc gamer\b|computadora|desktop|\btorre\b/.test(name)) return 'pcs';
+    if (/\bpc\b.*(amd|intel|ryzen|gamer|core i)|(amd|intel|ryzen|core i).*\bpc\b|computadora|desktop|\btorre\b|\bpc gamer\b/.test(name)) return 'pcs';
     if (/silla/.test(name)) return 'sillas';
     if (/\bmonitor\b/.test(name)) return 'monitores';
-    if (/\bmouse\b|\bteclado\b|auricular|headset|micr[oó]fono|kit de teclado/.test(name)) return 'perifericos';
+    if (/\bmouse\b|\bteclado\b|auricular|headset|micr[oó]fono|kit de teclado|webcam/.test(name)) return 'perifericos';
+    if (/conectividad|router|\bswitch\b|\bwifi\b|red inal/.test(name)) return 'conectividad';
     return '';
   }
 
