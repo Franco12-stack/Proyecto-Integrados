@@ -47,7 +47,7 @@
 {% include 'snipplets/home/home-categorias-grid.tpl' %}
 
 {# **** 3. Resto de secciones configurables desde el panel (sin el slider, ya renderizado) **** #}
-{% set newArray = ['slider'] %}
+{% set newArray = ['slider', 'products'] %}
 
 <div class="js-home-sections-container">
 	{% for i in 1..18 %}
