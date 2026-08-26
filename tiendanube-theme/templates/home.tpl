@@ -31,13 +31,23 @@
 	{% include "snipplets/svg/empty-placeholders.tpl" %}
 {% endif %}
 
-{# **** Secciones personalizadas — siempre al tope **** #}
+{# **** 1. Slider principal (se renderiza primero, antes que todo) **** #}
+{% if has_main_slider or has_mobile_slider %}
+	<section data-store="home-slider">
+		{% include 'snipplets/home/home-slider.tpl' %}
+		{% if has_mobile_slider %}
+			{% include 'snipplets/home/home-slider.tpl' with {mobile: true} %}
+		{% endif %}
+	</section>
+{% endif %}
+
+{# **** 2. Secciones personalizadas Integrados Argentinos **** #}
 {% include 'snipplets/home/home-mas-vendidos.tpl' %}
 {% include 'snipplets/home/home-armador-pc.tpl' %}
 {% include 'snipplets/home/home-categorias-grid.tpl' %}
 
-{# **** Secciones configurables desde el panel de Tienda Nube **** #}
-{% set newArray = [] %}
+{# **** 3. Resto de secciones configurables desde el panel (sin el slider, ya renderizado) **** #}
+{% set newArray = ['slider'] %}
 
 <div class="js-home-sections-container">
 	{% for i in 1..18 %}
