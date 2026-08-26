@@ -23,33 +23,7 @@
     <div class="js-swiper-mas-vendidos swiper-container">
       <div class="js-mv-grid swiper-wrapper flex-nowrap" id="mv-swiper-wrapper">
         {% for product in sections.primary.products %}
-          {% set mv_cat = '' %}
-          {% set mv_cn = product.categories | first %}
-          {% if mv_cn %}
-            {% set mv_cn = mv_cn.name | lower %}
-            {% if 'periferico' in mv_cn or 'mouse' in mv_cn or 'teclado' in mv_cn or 'auricular' in mv_cn or 'headset' in mv_cn or 'joystick' in mv_cn or 'gamepad' in mv_cn %}
-              {% set mv_cat = 'perifericos' %}
-            {% endif %}
-            {% if 'notebook' in mv_cn or 'laptop' in mv_cn %}
-              {% set mv_cat = 'notebooks' %}
-            {% endif %}
-            {% if 'pc armada' in mv_cn or 'computadora' in mv_cn or 'desktop' in mv_cn or 'torre' in mv_cn %}
-              {% set mv_cat = 'pcs' %}
-            {% endif %}
-            {% if 'placa de video' in mv_cn or 'gpu' in mv_cn or 'tarjeta de video' in mv_cn %}
-              {% set mv_cat = 'placas' %}
-            {% endif %}
-            {% if 'silla' in mv_cn %}
-              {% set mv_cat = 'sillas' %}
-            {% endif %}
-            {% if 'monitor' in mv_cn %}
-              {% set mv_cat = 'monitores' %}
-            {% endif %}
-            {% if 'conectividad' in mv_cn or 'router' in mv_cn or 'wifi' in mv_cn %}
-              {% set mv_cat = 'conectividad' %}
-            {% endif %}
-          {% endif %}
-          <div class="js-item-slide swiper-slide mv-slide" data-cat="{{ mv_cat }}">
+          <div class="js-item-slide swiper-slide mv-slide" data-cat="">
             {% include 'snipplets/product-item.tpl' with {'slide_item': true, 'section_name': 'primary'} %}
           </div>
         {% endfor %}
@@ -125,8 +99,28 @@
   }
   initMVSwiper();
 
-  var tabs = document.querySelectorAll('.mv-tab');
+  /* Detectar categoría desde el título del producto (evita problemas de scope en Twig) */
+  function detectCat(title) {
+    title = title.toLowerCase();
+    if (/mouse|teclado|auricular|headset|joystick|gamepad|periférico|periferico/.test(title)) return 'perifericos';
+    if (/notebook|laptop/.test(title)) return 'notebooks';
+    if (/\bpc\b|computadora|desktop|torre|kit rgb/.test(title)) return 'pcs';
+    if (/placa de video|rtx|radeon rx|geforce|gpu/.test(title)) return 'placas';
+    if (/silla/.test(title)) return 'sillas';
+    if (/monitor|pantalla/.test(title)) return 'monitores';
+    if (/router|wifi|conectividad|switch de red/.test(title)) return 'conectividad';
+    return '';
+  }
+
   var slides = document.querySelectorAll('.mv-slide');
+  slides.forEach(function(slide) {
+    var nameEl = slide.querySelector('.js-item-name, [class*="item-name"], [class*="product-name"], h3, h4');
+    if (nameEl) {
+      slide.setAttribute('data-cat', detectCat(nameEl.textContent || ''));
+    }
+  });
+
+  var tabs = document.querySelectorAll('.mv-tab');
   tabs.forEach(function(tab) {
     tab.addEventListener('click', function() {
       tabs.forEach(function(t) { t.classList.remove('mv-tab-active'); t.setAttribute('aria-selected', 'false'); });
