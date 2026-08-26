@@ -102,13 +102,13 @@
   /* Detectar categoría desde el título del producto (evita problemas de scope en Twig) */
   function detectCat(title) {
     title = title.toLowerCase();
-    if (/mouse|teclado|auricular|headset|joystick|gamepad|periférico|periferico/.test(title)) return 'perifericos';
     if (/notebook|laptop/.test(title)) return 'notebooks';
-    if (/\bpc\b|computadora|desktop|torre|kit rgb/.test(title)) return 'pcs';
-    if (/placa de video|rtx|radeon rx|geforce|gpu/.test(title)) return 'placas';
+    if (/placa de video|rtx\s?\d|radeon rx\s?\d|geforce/.test(title)) return 'placas';
+    if (/\bpc amd\b|\bpc intel\b|\bpc gamer\b|computadora|desktop|\btorre\b/.test(title)) return 'pcs';
     if (/silla/.test(title)) return 'sillas';
-    if (/monitor|pantalla/.test(title)) return 'monitores';
-    if (/router|wifi|conectividad|switch de red/.test(title)) return 'conectividad';
+    if (/\bmonitor\b/.test(title)) return 'monitores';
+    if (/router|conectividad|\bswitch\b de red/.test(title)) return 'conectividad';
+    if (/\bmouse\b|\bteclado\b|auricular|headset|joystick|gamepad/.test(title)) return 'perifericos';
     return '';
   }
 
