@@ -24,24 +24,31 @@
       <div class="js-mv-grid swiper-wrapper flex-nowrap" id="mv-swiper-wrapper">
         {% for product in sections.primary.products %}
           {% set mv_cat = '' %}
-          {% for cat in product.categories %}
-            {% set cn = cat.name | lower %}
-            {% if 'periferico' in cn or 'mouse' in cn or 'teclado' in cn or 'auricular' in cn or 'headset' in cn or 'joystick' in cn or 'gamepad' in cn %}
+          {% set mv_cn = product.categories | first %}
+          {% if mv_cn %}
+            {% set mv_cn = mv_cn.name | lower %}
+            {% if 'periferico' in mv_cn or 'mouse' in mv_cn or 'teclado' in mv_cn or 'auricular' in mv_cn or 'headset' in mv_cn or 'joystick' in mv_cn or 'gamepad' in mv_cn %}
               {% set mv_cat = 'perifericos' %}
-            {% elseif 'notebook' in cn or 'laptop' in cn %}
+            {% endif %}
+            {% if 'notebook' in mv_cn or 'laptop' in mv_cn %}
               {% set mv_cat = 'notebooks' %}
-            {% elseif 'pc armada' in cn or 'computadora' in cn or 'desktop' in cn or 'torre' in cn %}
+            {% endif %}
+            {% if 'pc armada' in mv_cn or 'computadora' in mv_cn or 'desktop' in mv_cn or 'torre' in mv_cn %}
               {% set mv_cat = 'pcs' %}
-            {% elseif 'placa de video' in cn or 'gpu' in cn or 'tarjeta de video' in cn or 'rtx' in cn or 'rx ' in cn %}
+            {% endif %}
+            {% if 'placa de video' in mv_cn or 'gpu' in mv_cn or 'tarjeta de video' in mv_cn %}
               {% set mv_cat = 'placas' %}
-            {% elseif 'silla' in cn %}
+            {% endif %}
+            {% if 'silla' in mv_cn %}
               {% set mv_cat = 'sillas' %}
-            {% elseif 'monitor' in cn %}
+            {% endif %}
+            {% if 'monitor' in mv_cn %}
               {% set mv_cat = 'monitores' %}
-            {% elseif 'conectividad' in cn or 'router' in cn or 'switch' in cn or 'red' in cn or 'wifi' in cn %}
+            {% endif %}
+            {% if 'conectividad' in mv_cn or 'router' in mv_cn or 'wifi' in mv_cn %}
               {% set mv_cat = 'conectividad' %}
             {% endif %}
-          {% endfor %}
+          {% endif %}
           <div class="js-item-slide swiper-slide mv-slide" data-cat="{{ mv_cat }}">
             {% include 'snipplets/product-item.tpl' with {'slide_item': true, 'section_name': 'primary'} %}
           </div>
