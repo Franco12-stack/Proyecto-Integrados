@@ -106,7 +106,7 @@
     cat = (cat || '').toLowerCase();
     if (/placa|nvidia|geforce|radeon/.test(cat)) return 'placas';
     if (/notebook|laptop/.test(cat)) return 'notebooks';
-    if (/mouse|teclado|auricular|headset|periferi|joystick|gamepad/.test(cat)) return 'perifericos';
+    if (/mouse|teclado|auricular|headset|periferi|joystick|gamepad|micrófono|microfono|kit de teclado/.test(cat)) return 'perifericos';
     if (/pc armada|computadora|desktop|torre/.test(cat)) return 'pcs';
     if (/silla/.test(cat)) return 'sillas';
     if (/monitor/.test(cat)) return 'monitores';
