@@ -102,21 +102,19 @@
   /* Detectar categoría desde el título del producto (evita problemas de scope en Twig) */
   function detectCat(title) {
     title = title.toLowerCase();
+    if (/placa de video|rtx|radeon rx|geforce/.test(title)) return 'placas';
     if (/notebook|laptop/.test(title)) return 'notebooks';
-    if (/placa de video|rtx\s?\d|radeon rx\s?\d|geforce/.test(title)) return 'placas';
-    if (/\bpc amd\b|\bpc intel\b|\bpc gamer\b|computadora|desktop|\btorre\b/.test(title)) return 'pcs';
     if (/silla/.test(title)) return 'sillas';
     if (/\bmonitor\b/.test(title)) return 'monitores';
-    if (/router|conectividad|\bswitch\b de red/.test(title)) return 'conectividad';
+    if (/router|conectividad/.test(title)) return 'conectividad';
     if (/\bmouse\b|\bteclado\b|auricular|headset|joystick|gamepad/.test(title)) return 'perifericos';
+    if (/\bpc amd\b|\bpc intel\b|\bpc gamer\b|computadora|desktop|\btorre\b/.test(title)) return 'pcs';
     return '';
   }
 
   var slides = document.querySelectorAll('.mv-slide');
   slides.forEach(function(slide) {
-    var img = slide.querySelector('img[alt]');
-    var link = slide.querySelector('a[title]');
-    var text = (img && img.alt) || (link && link.title) || slide.querySelector('a') && slide.querySelector('a').textContent || '';
+    var text = slide.textContent || '';
     slide.setAttribute('data-cat', detectCat(text));
   });
 
