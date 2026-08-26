@@ -23,8 +23,7 @@
     <div class="js-swiper-mas-vendidos swiper-container">
       <div class="js-mv-grid swiper-wrapper flex-nowrap" id="mv-swiper-wrapper">
         {% for product in sections.primary.products %}
-          {% set mv_first_cat = product.categories | first %}
-          <div class="js-item-slide swiper-slide mv-slide" data-cat="{{ mv_first_cat ? (mv_first_cat.name | lower) : '' }}">
+          <div class="js-item-slide swiper-slide mv-slide" data-cat="{{ product.url }}">
             {% include 'snipplets/product-item.tpl' with {'slide_item': true, 'section_name': 'primary'} %}
           </div>
         {% endfor %}
@@ -101,13 +100,13 @@
   initMVSwiper();
 
   /* Detectar categoría desde el título del producto (evita problemas de scope en Twig) */
-  /* Mapea el nombre de categoría real de Tienda Nube al tab correspondiente */
+  /* Extrae el slug de categoría de la URL del producto y lo mapea al tab */
   function mapCat(cat) {
     cat = (cat || '').toLowerCase();
     if (/placa|nvidia|geforce|radeon/.test(cat)) return 'placas';
     if (/notebook|laptop/.test(cat)) return 'notebooks';
-    if (/mouse|teclado|auricular|headset|periferi|joystick|gamepad|micrófono|microfono|kit de teclado/.test(cat)) return 'perifericos';
-    if (/pc armada|computadora|desktop|torre/.test(cat)) return 'pcs';
+    if (/mouse|teclado|auricular|headset|periferi|joystick|gamepad|microfono|kit-de-teclado/.test(cat)) return 'perifericos';
+    if (/pc-armada|computadora|desktop|torre/.test(cat)) return 'pcs';
     if (/silla/.test(cat)) return 'sillas';
     if (/monitor/.test(cat)) return 'monitores';
     if (/conectividad|router|wifi/.test(cat)) return 'conectividad';
@@ -116,7 +115,9 @@
 
   var slides = document.querySelectorAll('.mv-slide');
   slides.forEach(function(slide) {
-    slide.setAttribute('data-cat', mapCat(slide.getAttribute('data-cat')));
+    var url = slide.getAttribute('data-cat') || '';
+    var slug = url.replace(/^\//, '').split('/')[0];
+    slide.setAttribute('data-cat', mapCat(slug));
   });
 
   var tabs = document.querySelectorAll('.mv-tab');
