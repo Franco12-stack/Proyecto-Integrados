@@ -114,10 +114,10 @@
 
   var slides = document.querySelectorAll('.mv-slide');
   slides.forEach(function(slide) {
-    var nameEl = slide.querySelector('.js-item-name, [class*="item-name"], [class*="product-name"], h3, h4');
-    if (nameEl) {
-      slide.setAttribute('data-cat', detectCat(nameEl.textContent || ''));
-    }
+    var img = slide.querySelector('img[alt]');
+    var link = slide.querySelector('a[title]');
+    var text = (img && img.alt) || (link && link.title) || slide.querySelector('a') && slide.querySelector('a').textContent || '';
+    slide.setAttribute('data-cat', detectCat(text));
   });
 
   var tabs = document.querySelectorAll('.mv-tab');
