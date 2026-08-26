@@ -1,21 +1,14 @@
-{# Sección "Más Vendidos" con tabs por categoría y carrusel #}
+{# Sección "Más Vendidos" con tabs dinámicos por categoría y carrusel #}
 {% if sections.primary is defined and sections.primary.products is defined and sections.primary.products is not empty %}
 <section class="section-home section-mas-vendidos-home py-4">
   <div class="container position-relative">
 
     <h2 class="js-products-featured-title h4 mb-3">Más Vendidos</h2>
 
-    {# Tabs de categorías #}
+    {# Solo el tab "Todos" — el JS agrega los demás dinámicamente #}
     <div class="mv-tabs-wrapper mb-3">
-      <div class="mv-tabs" role="tablist">
+      <div class="mv-tabs" id="mv-tabs-list" role="tablist">
         <button class="mv-tab mv-tab-active" data-tab="todos" role="tab" aria-selected="true">Todos</button>
-        <button class="mv-tab" data-tab="perifericos" role="tab" aria-selected="false">Periféricos</button>
-        <button class="mv-tab" data-tab="notebooks" role="tab" aria-selected="false">Notebooks</button>
-        <button class="mv-tab" data-tab="pcs" role="tab" aria-selected="false">PCs Armadas</button>
-        <button class="mv-tab" data-tab="placas" role="tab" aria-selected="false">Placas de Video</button>
-        <button class="mv-tab" data-tab="sillas" role="tab" aria-selected="false">Sillas Gamers</button>
-        <button class="mv-tab" data-tab="monitores" role="tab" aria-selected="false">Monitores</button>
-        <button class="mv-tab" data-tab="conectividad" role="tab" aria-selected="false">Conectividad</button>
       </div>
     </div>
 
@@ -36,6 +29,16 @@
             {%- set _cat = 'perifericos' -%}
           {%- elseif 'pc amd' in _n or 'pc intel' in _n or 'pc gamer' in _n or 'pc ryzen' in _n or 'computadora' in _n or 'desktop' in _n -%}
             {%- set _cat = 'pcs' -%}
+          {%- elseif 'procesador' in _n or 'ryzen' in _n or 'core i' in _n or 'intel core' in _n -%}
+            {%- set _cat = 'procesadores' -%}
+          {%- elseif 'mother' in _n or 'placa madre' in _n or 'motherboard' in _n -%}
+            {%- set _cat = 'motherboards' -%}
+          {%- elseif 'almacenamiento' in _n or ' ssd' in _n or ' hdd' in _n or 'disco' in _n or 'pendrive' in _n -%}
+            {%- set _cat = 'almacenamiento' -%}
+          {%- elseif 'fuente' in _n or 'psu' in _n -%}
+            {%- set _cat = 'fuentes' -%}
+          {%- elseif 'memoria ram' in _n or ' ram ' in _n -%}
+            {%- set _cat = 'memorias' -%}
           {%- elseif 'router' in _n or 'wifi' in _n or 'conectividad' in _n -%}
             {%- set _cat = 'conectividad' -%}
           {%- else -%}
@@ -117,17 +120,62 @@
   }
   initMVSwiper();
 
-  var slides = document.querySelectorAll('.mv-slide');
-  var tabs = document.querySelectorAll('.mv-tab');
+  /* Etiquetas legibles por clave de categoría */
+  var catLabels = {
+    'placas':        'Placas de Video',
+    'notebooks':     'Notebooks',
+    'sillas':        'Sillas Gamers',
+    'monitores':     'Monitores',
+    'perifericos':   'Periféricos',
+    'pcs':           'PCs Armadas',
+    'procesadores':  'Procesadores',
+    'motherboards':  'Motherboards',
+    'almacenamiento':'Almacenamiento',
+    'fuentes':       'Fuentes',
+    'memorias':      'Memorias RAM',
+    'conectividad':  'Conectividad'
+  };
 
-  /* Ocultar tabs sin productos */
+  /* Orden preferido de los tabs */
+  var catOrder = ['pcs','procesadores','placas','notebooks','memorias','motherboards','almacenamiento','fuentes','monitores','perifericos','sillas','conectividad'];
+
+  var slides = document.querySelectorAll('.mv-slide');
+  var tabsList = document.getElementById('mv-tabs-list');
+
+  /* Detectar categorías presentes */
   var usedCats = {};
-  slides.forEach(function(s) { usedCats[s.getAttribute('data-cat')] = true; });
-  tabs.forEach(function(tab) {
-    var t = tab.getAttribute('data-tab');
-    if (t !== 'todos' && !usedCats[t]) tab.style.display = 'none';
+  slides.forEach(function(s) {
+    var c = s.getAttribute('data-cat');
+    if (c) usedCats[c] = true;
   });
 
+  /* Generar tabs en el orden definido */
+  catOrder.forEach(function(cat) {
+    if (!usedCats[cat]) return;
+    var btn = document.createElement('button');
+    btn.className = 'mv-tab';
+    btn.setAttribute('data-tab', cat);
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('aria-selected', 'false');
+    btn.textContent = catLabels[cat] || cat;
+    tabsList.appendChild(btn);
+  });
+
+  /* Agregar cualquier categoría no contemplada en catOrder */
+  Object.keys(usedCats).forEach(function(cat) {
+    if (catOrder.indexOf(cat) === -1) {
+      var btn = document.createElement('button');
+      btn.className = 'mv-tab';
+      btn.setAttribute('data-tab', cat);
+      btn.setAttribute('role', 'tab');
+      btn.setAttribute('aria-selected', 'false');
+      btn.textContent = catLabels[cat] || cat;
+      tabsList.appendChild(btn);
+    }
+  });
+
+  /* Lógica de filtrado */
+  var tabs = document.querySelectorAll('.mv-tab');
   tabs.forEach(function(tab) {
     tab.addEventListener('click', function() {
       tabs.forEach(function(t) { t.classList.remove('mv-tab-active'); t.setAttribute('aria-selected', 'false'); });
