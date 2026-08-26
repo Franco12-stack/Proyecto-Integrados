@@ -119,6 +119,15 @@
 
   var slides = document.querySelectorAll('.mv-slide');
   var tabs = document.querySelectorAll('.mv-tab');
+
+  /* Ocultar tabs sin productos */
+  var usedCats = {};
+  slides.forEach(function(s) { usedCats[s.getAttribute('data-cat')] = true; });
+  tabs.forEach(function(tab) {
+    var t = tab.getAttribute('data-tab');
+    if (t !== 'todos' && !usedCats[t]) tab.style.display = 'none';
+  });
+
   tabs.forEach(function(tab) {
     tab.addEventListener('click', function() {
       tabs.forEach(function(t) { t.classList.remove('mv-tab-active'); t.setAttribute('aria-selected', 'false'); });
