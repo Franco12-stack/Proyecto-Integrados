@@ -23,7 +23,8 @@
     <div class="js-swiper-mas-vendidos swiper-container">
       <div class="js-mv-grid swiper-wrapper flex-nowrap" id="mv-swiper-wrapper">
         {% for product in sections.primary.products %}
-          <div class="js-item-slide swiper-slide mv-slide" data-cat="">
+          {% set mv_first_cat = product.categories | first %}
+          <div class="js-item-slide swiper-slide mv-slide" data-cat="{{ mv_first_cat ? (mv_first_cat.name | lower) : '' }}">
             {% include 'snipplets/product-item.tpl' with {'slide_item': true, 'section_name': 'primary'} %}
           </div>
         {% endfor %}
@@ -100,22 +101,22 @@
   initMVSwiper();
 
   /* Detectar categoría desde el título del producto (evita problemas de scope en Twig) */
-  function detectCat(title) {
-    title = title.toLowerCase();
-    if (/placa de video|rtx|radeon rx|geforce/.test(title)) return 'placas';
-    if (/notebook|laptop/.test(title)) return 'notebooks';
-    if (/silla/.test(title)) return 'sillas';
-    if (/\bmonitor\b/.test(title)) return 'monitores';
-    if (/router|conectividad/.test(title)) return 'conectividad';
-    if (/\bmouse\b|\bteclado\b|auricular|headset|joystick|gamepad/.test(title)) return 'perifericos';
-    if (/\bpc amd\b|\bpc intel\b|\bpc gamer\b|computadora|desktop|\btorre\b/.test(title)) return 'pcs';
+  /* Mapea el nombre de categoría real de Tienda Nube al tab correspondiente */
+  function mapCat(cat) {
+    cat = (cat || '').toLowerCase();
+    if (/placa|nvidia|geforce|radeon/.test(cat)) return 'placas';
+    if (/notebook|laptop/.test(cat)) return 'notebooks';
+    if (/mouse|teclado|auricular|headset|periferi|joystick|gamepad/.test(cat)) return 'perifericos';
+    if (/pc armada|computadora|desktop|torre/.test(cat)) return 'pcs';
+    if (/silla/.test(cat)) return 'sillas';
+    if (/monitor/.test(cat)) return 'monitores';
+    if (/conectividad|router|wifi/.test(cat)) return 'conectividad';
     return '';
   }
 
   var slides = document.querySelectorAll('.mv-slide');
   slides.forEach(function(slide) {
-    var text = slide.textContent || '';
-    slide.setAttribute('data-cat', detectCat(text));
+    slide.setAttribute('data-cat', mapCat(slide.getAttribute('data-cat')));
   });
 
   var tabs = document.querySelectorAll('.mv-tab');
