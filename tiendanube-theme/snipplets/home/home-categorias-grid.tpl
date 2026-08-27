@@ -201,6 +201,7 @@
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
   gap: 5px;
+  align-content: stretch;
 }
 @media (max-width: 767px) { .catg-small-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; } }
 
@@ -211,7 +212,8 @@
   overflow: hidden;
   text-decoration: none;
   position: relative;
-  aspect-ratio: 1/1;
+  aspect-ratio: unset;
+  min-height: 0;
 }
 .catg-card-empty {
   border-radius: 8px;
