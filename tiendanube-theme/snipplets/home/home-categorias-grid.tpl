@@ -85,7 +85,7 @@
       <div class="catg-page">
         <div class="catg-page-inner catg-no-featured">
 
-          <div class="catg-small-grid catg-small-grid-p2">
+          <div class="catg-small-grid">
 
             <a href="/procesadores/" class="catg-card catg-card-small">
               <img src="{{ 'cat-procesadores.jpg' | static_url }}" alt="Procesadores" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -142,7 +142,6 @@
 
 /* Página 2: sin card grande, ocupa todo el ancho */
 .catg-no-featured { grid-template-columns: 1fr; }
-.catg-small-grid-p2 { grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 1fr); }
 
 .catg-header {
   display: flex;
