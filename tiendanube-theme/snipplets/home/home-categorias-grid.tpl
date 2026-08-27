@@ -81,17 +81,17 @@
         </div>
       </div>{# fin página 1 #}
 
-      {# PÁGINA 2 #}
+      {# PÁGINA 2 — solo grilla de pequeñas, sin card grande #}
       <div class="catg-page">
-        <div class="catg-page-inner">
+        <div class="catg-page-inner catg-no-featured">
 
-          <a href="/procesadores/" class="catg-card catg-card-featured">
-            <img src="{{ 'cat-procesadores.jpg' | static_url }}" alt="Procesadores" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="catg-placeholder catg-placeholder-featured" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.3"><rect x="4" y="4" width="16" height="16" rx="1"/><rect x="9" y="9" width="6" height="6"/></svg></div>
-            <div class="catg-overlay"><span class="catg-label-featured">PROCESADORES</span></div>
-          </a>
+          <div class="catg-small-grid catg-small-grid-p2">
 
-          <div class="catg-small-grid">
+            <a href="/procesadores/" class="catg-card catg-card-small">
+              <img src="{{ 'cat-procesadores.jpg' | static_url }}" alt="Procesadores" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="catg-placeholder" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="1"/><rect x="9" y="9" width="6" height="6"/></svg></div>
+              <div class="catg-overlay"><span class="catg-label">PROCESADORES</span></div>
+            </a>
 
             <a href="/placas-de-video/" class="catg-card catg-card-small">
               <img src="{{ 'cat-placas-video.jpg' | static_url }}" alt="Placas de Video" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -117,8 +117,7 @@
               <div class="catg-overlay"><span class="catg-label">CONECTIVIDAD</span></div>
             </a>
 
-            {# 4 celdas vacías para completar la grilla si hacen falta #}
-            <div class="catg-card-empty"></div>
+            {# 3 celdas vacías para completar la fila #}
             <div class="catg-card-empty"></div>
             <div class="catg-card-empty"></div>
             <div class="catg-card-empty"></div>
@@ -140,6 +139,10 @@
 
 <style>
 .section-categorias-grid { background: #f5f7fa; }
+
+/* Página 2: sin card grande, ocupa todo el ancho */
+.catg-no-featured { grid-template-columns: 1fr; }
+.catg-small-grid-p2 { grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 1fr); }
 
 .catg-header {
   display: flex;
