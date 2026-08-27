@@ -1,7 +1,7 @@
 {# Banner "Armá tu PC" - estilo banner con foto de fondo #}
 <section class="section-home section-armador-pc py-4">
   <div class="container">
-    <a href="/armador-de-pc" class="armador-pc-banner" aria-label="Armá tu PC">
+    <a href="/arma-tu-pc/" class="armador-pc-banner" aria-label="Armá tu PC">
       {# Imagen de fondo — subí "banner-armador-pc.jpg" al FTP en /static/ #}
       <img src="{{ 'banner-armador-pc.jpg' | static_url }}" alt="" class="armador-pc-bg" onerror="this.style.display='none'">
       <div class="armador-pc-overlay"></div>
