@@ -1,5 +1,5 @@
 {# Carrusel de categorías — card grande PC + grilla 2×4 con paginación #}
-<section class="section-home section-categorias-grid py-5">
+<section class="section-home section-categorias-grid py-4">
   <div class="container">
 
     <div class="catg-header">
