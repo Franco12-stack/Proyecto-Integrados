@@ -53,6 +53,7 @@
   object-position: center;
   display: block;
   transition: transform 0.4s;
+  pointer-events: none;
 }
 .armador-pc-banner:hover .armador-pc-bg { transform: scale(1.03); }
 
@@ -61,6 +62,7 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(90deg, rgba(5,20,80,0.82) 0%, rgba(5,20,80,0.55) 55%, rgba(5,20,80,0.2) 100%);
+  pointer-events: none;
 }
 
 /* Contenido */
