@@ -59,7 +59,7 @@
               <div class="catg-overlay"><span class="catg-label">FUENTES</span></div>
             </a>
 
-            <a href="/sillas-gamer/" class="catg-card catg-card-small">
+            <a href="/otros/sillas-y-escritorios/" class="catg-card catg-card-small">
               <img src="{{ 'cat-sillas.jpg' | static_url }}" alt="Sillas Gamers" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
               <div class="catg-placeholder" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><path d="M12 2C6 2 4 7 4 12v4h16v-4c0-5-2-10-8-10z"/></svg></div>
               <div class="catg-overlay"><span class="catg-label">SILLAS GAMERS</span></div>
