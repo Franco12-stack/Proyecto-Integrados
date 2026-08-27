@@ -178,7 +178,7 @@
 .catg-page-inner {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  gap: 8px;
+  gap: 5px;
 }
 @media (max-width: 600px) {
   .catg-page-inner { grid-template-columns: 1fr; }
@@ -187,7 +187,7 @@
 /* Card grande */
 .catg-card-featured {
   display: block;
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
   text-decoration: none;
   position: relative;
@@ -200,21 +200,21 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  gap: 8px;
+  gap: 5px;
 }
 @media (max-width: 767px) { .catg-small-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; } }
 
 /* Card pequeña */
 .catg-card-small {
   display: block;
-  border-radius: 10px;
+  border-radius: 8px;
   overflow: hidden;
   text-decoration: none;
   position: relative;
   aspect-ratio: 1/1;
 }
 .catg-card-empty {
-  border-radius: 10px;
+  border-radius: 8px;
   background: transparent;
 }
 
@@ -238,24 +238,26 @@
 /* Overlay con label */
 .catg-overlay {
   position: absolute; bottom: 0; left: 0; right: 0;
-  background: linear-gradient(0deg, rgba(0,0,0,0.68) 0%, transparent 100%);
-  padding: 24px 12px 10px;
+  background: linear-gradient(0deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.2) 70%, transparent 100%);
+  padding: 28px 12px 10px;
 }
-.catg-card-small .catg-overlay { padding: 16px 8px 7px; }
+.catg-card-small .catg-overlay { padding: 20px 10px 8px; }
 
 .catg-label-featured {
   display: block;
   color: #fff;
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 800;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 .catg-label {
   display: block;
   color: #fff;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 /* Dots */
