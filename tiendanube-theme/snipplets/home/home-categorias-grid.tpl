@@ -196,7 +196,14 @@
   position: relative;
   aspect-ratio: 3/4;
 }
-@media (max-width: 600px) { .catg-card-featured { aspect-ratio: 16/9; } }
+@media (max-width: 767px) {
+  .catg-card-featured {
+    aspect-ratio: 4/3;
+  }
+  .catg-card-featured .catg-img {
+    object-position: center 30%;
+  }
+}
 
 /* Grilla pequeña */
 .catg-small-grid {
@@ -206,7 +213,10 @@
   gap: 5px;
   align-content: stretch;
 }
-@media (max-width: 767px) { .catg-small-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; } }
+@media (max-width: 767px) {
+  .catg-small-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+  .catg-card-small { aspect-ratio: 4/3; }
+}
 
 /* Card pequeña */
 .catg-card-small {
