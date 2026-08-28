@@ -28,22 +28,10 @@
         <div class="catg-page catg-page-active">
           <div class="catg-small-grid">
 
-            <a href="/monitores/" class="catg-card catg-card-small">
-              <img src="{{ 'cat-monitores.jpg' | static_url }}" alt="Monitores" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="catg-placeholder" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-              <div class="catg-overlay"><span class="catg-label">MONITORES</span></div>
-            </a>
-
-            <a href="/notebooks/" class="catg-card catg-card-small">
-              <img src="{{ 'cat-notebooks.jpg' | static_url }}" alt="Notebooks" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="catg-placeholder" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><rect x="2" y="4" width="20" height="14" rx="2"/><line x1="2" y1="22" x2="22" y2="22"/></svg></div>
-              <div class="catg-overlay"><span class="catg-label">NOTEBOOKS</span></div>
-            </a>
-
-            <a href="/memorias-ram/" class="catg-card catg-card-small">
-              <img src="{{ 'cat-memoria-ram.jpg' | static_url }}" alt="Memorias RAM" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="catg-placeholder" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><rect x="1" y="8" width="22" height="8" rx="1"/><line x1="6" y1="8" x2="6" y2="16"/><line x1="10" y1="8" x2="10" y2="16"/><line x1="14" y1="8" x2="14" y2="16"/><line x1="18" y1="8" x2="18" y2="16"/></svg></div>
-              <div class="catg-overlay"><span class="catg-label">MEMORIAS RAM</span></div>
+            <a href="/fuentes/" class="catg-card catg-card-small">
+              <img src="{{ 'cat-fuentes.jpg' | static_url }}" alt="Fuentes" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="catg-placeholder" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+              <div class="catg-overlay"><span class="catg-label">FUENTES</span></div>
             </a>
 
             <a href="/mothers/" class="catg-card catg-card-small">
@@ -52,28 +40,40 @@
               <div class="catg-overlay"><span class="catg-label">MOTHERS</span></div>
             </a>
 
-            <a href="/fuentes/" class="catg-card catg-card-small">
-              <img src="{{ 'cat-fuentes.jpg' | static_url }}" alt="Fuentes" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="catg-placeholder" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-              <div class="catg-overlay"><span class="catg-label">FUENTES</span></div>
+            <a href="/memorias-ram/" class="catg-card catg-card-small">
+              <img src="{{ 'cat-memoria-ram.jpg' | static_url }}" alt="Memorias RAM" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="catg-placeholder" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><rect x="1" y="8" width="22" height="8" rx="1"/><line x1="6" y1="8" x2="6" y2="16"/><line x1="10" y1="8" x2="10" y2="16"/><line x1="14" y1="8" x2="14" y2="16"/><line x1="18" y1="8" x2="18" y2="16"/></svg></div>
+              <div class="catg-overlay"><span class="catg-label">MEMORIAS RAM</span></div>
             </a>
 
-            <a href="/otros/sillas-y-escritorios/" class="catg-card catg-card-small">
-              <img src="{{ 'cat-sillas.jpg' | static_url }}" alt="Sillas Gamers" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="catg-placeholder" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><path d="M12 2C6 2 4 7 4 12v4h16v-4c0-5-2-10-8-10z"/></svg></div>
-              <div class="catg-overlay"><span class="catg-label">SILLAS GAMERS</span></div>
-            </a>
-
-            <a href="/perifericos/" class="catg-card catg-card-small">
-              <img src="{{ 'cat-perifericos.jpg' | static_url }}" alt="Periféricos" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="catg-placeholder" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/></svg></div>
-              <div class="catg-overlay"><span class="catg-label">PERIFÉRICOS</span></div>
+            <a href="/procesadores/" class="catg-card catg-card-small">
+              <img src="{{ 'cat-procesadores.jpg' | static_url }}" alt="Procesadores" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="catg-placeholder" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="1"/><rect x="9" y="9" width="6" height="6"/></svg></div>
+              <div class="catg-overlay"><span class="catg-label">PROCESADORES</span></div>
             </a>
 
             <a href="/almacenamiento/" class="catg-card catg-card-small">
               <img src="{{ 'cat-almacenamiento.jpg' | static_url }}" alt="Almacenamiento" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
               <div class="catg-placeholder" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
               <div class="catg-overlay"><span class="catg-label">ALMACENAMIENTO</span></div>
+            </a>
+
+            <a href="/placas-de-video/" class="catg-card catg-card-small">
+              <img src="{{ 'cat-placas-video.jpg' | static_url }}" alt="Placas de Video" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="catg-placeholder" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><rect x="1" y="6" width="22" height="12" rx="2"/><circle cx="8" cy="12" r="2"/><circle cx="16" cy="12" r="2"/></svg></div>
+              <div class="catg-overlay"><span class="catg-label">PLACAS DE VIDEO</span></div>
+            </a>
+
+            <a href="/refrigeracion/" class="catg-card catg-card-small">
+              <img src="{{ 'cat-refrigeracion.jpg' | static_url }}" alt="Refrigeración" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="catg-placeholder" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><path d="M12 2v20M4 7l16 10M20 7L4 17"/></svg></div>
+              <div class="catg-overlay"><span class="catg-label">REFRIGERACIÓN</span></div>
+            </a>
+
+            <a href="/monitores/" class="catg-card catg-card-small">
+              <img src="{{ 'cat-monitores.jpg' | static_url }}" alt="Monitores" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="catg-placeholder" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+              <div class="catg-overlay"><span class="catg-label">MONITORES</span></div>
             </a>
 
           </div>{# fin grilla #}
@@ -83,28 +83,16 @@
         <div class="catg-page">
           <div class="catg-small-grid">
 
-            <a href="/procesadores/" class="catg-card catg-card-small">
-              <img src="{{ 'cat-procesadores.jpg' | static_url }}" alt="Procesadores" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="catg-placeholder" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="1"/><rect x="9" y="9" width="6" height="6"/></svg></div>
-              <div class="catg-overlay"><span class="catg-label">PROCESADORES</span></div>
-            </a>
-
-            <a href="/placas-de-video/" class="catg-card catg-card-small">
-              <img src="{{ 'cat-placas-video.jpg' | static_url }}" alt="Placas de Video" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="catg-placeholder" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><rect x="1" y="6" width="22" height="12" rx="2"/><circle cx="8" cy="12" r="2"/><circle cx="16" cy="12" r="2"/></svg></div>
-              <div class="catg-overlay"><span class="catg-label">PLACAS DE VIDEO</span></div>
-            </a>
-
             <a href="/gabinetes/" class="catg-card catg-card-small">
               <img src="{{ 'cat-gabinete.jpg' | static_url }}" alt="Gabinetes" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
               <div class="catg-placeholder" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><rect x="3" y="2" width="12" height="20" rx="2"/></svg></div>
               <div class="catg-overlay"><span class="catg-label">GABINETES</span></div>
             </a>
 
-            <a href="/impresoras/" class="catg-card catg-card-small">
-              <img src="{{ 'cat-impresora.jpg' | static_url }}" alt="Impresoras" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="catg-placeholder" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></div>
-              <div class="catg-overlay"><span class="catg-label">IMPRESORAS</span></div>
+            <a href="/perifericos/" class="catg-card catg-card-small">
+              <img src="{{ 'cat-perifericos.jpg' | static_url }}" alt="Periféricos" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="catg-placeholder" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/></svg></div>
+              <div class="catg-overlay"><span class="catg-label">PERIFÉRICOS</span></div>
             </a>
 
             <a href="/conectividad-y-redes/" class="catg-card catg-card-small">
@@ -113,10 +101,35 @@
               <div class="catg-overlay"><span class="catg-label">CONECTIVIDAD</span></div>
             </a>
 
-            {# 3 celdas vacías para completar la fila #}
-            <div class="catg-card-empty"></div>
-            <div class="catg-card-empty"></div>
-            <div class="catg-card-empty"></div>
+            <a href="/otros/sillas-y-escritorios/" class="catg-card catg-card-small">
+              <img src="{{ 'cat-sillas.jpg' | static_url }}" alt="Sillas Gamers" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="catg-placeholder" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><path d="M12 2C6 2 4 7 4 12v4h16v-4c0-5-2-10-8-10z"/></svg></div>
+              <div class="catg-overlay"><span class="catg-label">SILLAS</span></div>
+            </a>
+
+            <a href="/notebooks/" class="catg-card catg-card-small">
+              <img src="{{ 'cat-notebooks.jpg' | static_url }}" alt="Notebooks" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="catg-placeholder" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><rect x="2" y="4" width="20" height="14" rx="2"/><line x1="2" y1="22" x2="22" y2="22"/></svg></div>
+              <div class="catg-overlay"><span class="catg-label">NOTEBOOKS</span></div>
+            </a>
+
+            <a href="/impresoras/" class="catg-card catg-card-small">
+              <img src="{{ 'cat-impresora.jpg' | static_url }}" alt="Impresoras" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="catg-placeholder" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></div>
+              <div class="catg-overlay"><span class="catg-label">IMPRESORAS</span></div>
+            </a>
+
+            <a href="/tablets1/" class="catg-card catg-card-small">
+              <img src="{{ 'cat-tablets.jpg' | static_url }}" alt="Tablets" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="catg-placeholder" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+              <div class="catg-overlay"><span class="catg-label">TABLETS</span></div>
+            </a>
+
+            <a href="/simuladores/" class="catg-card catg-card-small">
+              <img src="{{ 'cat-simuladores.jpg' | static_url }}" alt="Simuladores" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="catg-placeholder" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="7" y1="10" x2="7" y2="14"/><line x1="5" y1="12" x2="9" y2="12"/><circle cx="16" cy="10" r="1" fill="#fff"/><circle cx="18" cy="13" r="1" fill="#fff"/></svg></div>
+              <div class="catg-overlay"><span class="catg-label">SIMULADORES</span></div>
+            </a>
 
           </div>
         </div>{# fin página 2 #}
@@ -218,10 +231,10 @@
   overflow: hidden;
   text-decoration: none;
   position: relative;
-  aspect-ratio: 4/3;
+  aspect-ratio: 1/1;
 }
 .catg-card-empty {
-  aspect-ratio: 4/3;
+  aspect-ratio: 1/1;
   border-radius: 8px;
   background: transparent;
 }
