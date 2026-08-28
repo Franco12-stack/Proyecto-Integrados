@@ -61,7 +61,7 @@
 .armador-pc-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(5,20,80,0.82) 0%, rgba(5,20,80,0.55) 55%, rgba(5,20,80,0.2) 100%);
+  background: linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 45%, rgba(0,0,0,0) 70%);
   pointer-events: none;
 }
 
