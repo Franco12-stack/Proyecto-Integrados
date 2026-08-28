@@ -140,9 +140,6 @@
 <style>
 .section-categorias-grid { background: #f5f7fa; }
 
-/* Página 2: sin card grande, ocupa todo el ancho */
-.catg-no-featured { grid-template-columns: 1fr; }
-
 .catg-header {
   display: flex;
   align-items: center;
@@ -185,6 +182,7 @@
 @media (max-width: 600px) {
   .catg-page-inner { grid-template-columns: 1fr; }
 }
+.catg-page-inner.catg-no-featured { grid-template-columns: 1fr; }
 
 /* Card grande */
 .catg-card-featured {
