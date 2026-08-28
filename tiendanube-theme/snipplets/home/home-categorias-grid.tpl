@@ -218,10 +218,10 @@
   overflow: hidden;
   text-decoration: none;
   position: relative;
-  aspect-ratio: 3/4;
+  aspect-ratio: 4/3;
 }
 .catg-card-empty {
-  aspect-ratio: 3/4;
+  aspect-ratio: 4/3;
   border-radius: 8px;
   background: transparent;
 }
