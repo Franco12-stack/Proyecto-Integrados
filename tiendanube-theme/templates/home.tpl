@@ -43,8 +43,16 @@
 
 {# **** 2. Secciones personalizadas Integrados Argentinos **** #}
 
-{# Productos con temporizador — se muestra arriba de "Más Vendidos" #}
-{% if has_timer_offers %}
+{# Productos con temporizador — se muestra arriba de "Más Vendidos", solo si está configurado como "Mostrar" en el panel #}
+{% set timer_offers_enabled = false %}
+{% for i in 1..18 %}
+	{% set position = 'home_order_position_' ~ i %}
+	{% if attribute(settings, position) == 'timer_offers' %}
+		{% set timer_offers_enabled = true %}
+	{% endif %}
+{% endfor %}
+
+{% if has_timer_offers and timer_offers_enabled %}
 	{% set section_select = 'timer_offers' %}
 	{% include 'snipplets/home/home-section-switch.tpl' %}
 {% endif %}
