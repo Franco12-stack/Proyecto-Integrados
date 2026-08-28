@@ -42,12 +42,19 @@
 {% endif %}
 
 {# **** 2. Secciones personalizadas Integrados Argentinos **** #}
+
+{# Productos con temporizador — se muestra arriba de "Más Vendidos" #}
+{% if has_timer_offers %}
+	{% set section_select = 'timer_offers' %}
+	{% include 'snipplets/home/home-section-switch.tpl' %}
+{% endif %}
+
 {% include 'snipplets/home/home-mas-vendidos.tpl' %}
 {% include 'snipplets/home/home-armador-pc.tpl' %}
 {% include 'snipplets/home/home-categorias-grid.tpl' %}
 
-{# **** 3. Resto de secciones configurables desde el panel (sin el slider, ya renderizado) **** #}
-{% set newArray = ['slider', 'products'] %}
+{# **** 3. Resto de secciones configurables desde el panel (sin el slider, timer_offers y products, ya renderizados) **** #}
+{% set newArray = ['slider', 'products', 'timer_offers'] %}
 
 <div class="js-home-sections-container">
 	{% for i in 1..18 %}
