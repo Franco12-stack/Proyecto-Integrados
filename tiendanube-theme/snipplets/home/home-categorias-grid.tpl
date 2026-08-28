@@ -10,23 +10,22 @@
       </div>
     </div>
 
-    {# Páginas de categorías — cada página: 1 grande + 8 pequeñas #}
-    <div class="catg-pages-wrapper">
+    <div class="catg-layout">
 
-      {# PÁGINA 1 #}
-      <div class="catg-page catg-page-active">
-        <div class="catg-page-inner">
+      {# Card grande — FIJA, no pagina #}
+      <a href="/pc2/" class="catg-card catg-card-featured">
+        <img src="{{ 'cat-pc-escritorios.jpg' | static_url }}" alt="PC de Escritorio" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="catg-placeholder catg-placeholder-featured" style="display:none">
+          <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.3"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div class="catg-overlay"><span class="catg-label-featured">PC DE ESCRITORIO</span></div>
+      </a>
 
-          {# Card grande #}
-          <a href="/pc2/" class="catg-card catg-card-featured">
-            <img src="{{ 'cat-pc-escritorios.jpg' | static_url }}" alt="PC de Escritorio" class="catg-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="catg-placeholder catg-placeholder-featured" style="display:none">
-              <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.3"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-            </div>
-            <div class="catg-overlay"><span class="catg-label-featured">PC DE ESCRITORIO</span></div>
-          </a>
+      {# Páginas — solo la grilla de pequeñas rota #}
+      <div class="catg-pages-wrapper">
 
-          {# Grilla 2×4 #}
+        {# PÁGINA 1 #}
+        <div class="catg-page catg-page-active">
           <div class="catg-small-grid">
 
             <a href="/monitores/" class="catg-card catg-card-small">
@@ -78,13 +77,10 @@
             </a>
 
           </div>{# fin grilla #}
-        </div>
-      </div>{# fin página 1 #}
+        </div>{# fin página 1 #}
 
-      {# PÁGINA 2 — solo grilla de pequeñas, sin card grande #}
-      <div class="catg-page">
-        <div class="catg-page-inner catg-no-featured">
-
+        {# PÁGINA 2 #}
+        <div class="catg-page">
           <div class="catg-small-grid">
 
             <a href="/procesadores/" class="catg-card catg-card-small">
@@ -123,10 +119,11 @@
             <div class="catg-card-empty"></div>
 
           </div>
-        </div>
-      </div>{# fin página 2 #}
+        </div>{# fin página 2 #}
 
-    </div>{# fin pages-wrapper #}
+      </div>{# fin pages-wrapper #}
+
+    </div>{# fin catg-layout #}
 
     {# Dots #}
     <div class="catg-dots">
@@ -174,15 +171,14 @@
 .catg-page { display: none; }
 .catg-page.catg-page-active { display: block; }
 
-.catg-page-inner {
+.catg-layout {
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 5px;
 }
 @media (max-width: 600px) {
-  .catg-page-inner { grid-template-columns: 1fr; }
+  .catg-layout { grid-template-columns: 1fr; }
 }
-.catg-page-inner.catg-no-featured { grid-template-columns: 1fr; }
 
 /* Card grande */
 .catg-card-featured {
