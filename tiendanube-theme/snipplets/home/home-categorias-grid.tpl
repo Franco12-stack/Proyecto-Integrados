@@ -180,35 +180,35 @@
   .catg-layout { grid-template-columns: 1fr; }
 }
 
-/* Card grande */
+/* Card grande — su altura se adapta a la de la grilla de chicas (no fija) */
 .catg-card-featured {
   display: block;
   border-radius: 10px;
   overflow: hidden;
   text-decoration: none;
   position: relative;
-  aspect-ratio: 3/4;
+  height: 100%;
 }
 @media (max-width: 767px) {
   .catg-card-featured {
     aspect-ratio: 4/3;
+    height: auto;
   }
   .catg-card-featured .catg-img {
     object-position: center 30%;
   }
 }
 
-/* Grilla pequeña */
+/* Grilla pequeña — altura definida por el aspect-ratio de cada card, igual en ambas páginas */
 .catg-small-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
   gap: 5px;
-  align-content: stretch;
 }
 @media (max-width: 767px) {
   .catg-small-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
-  .catg-card-small { aspect-ratio: 4/3; }
+  .catg-card-small, .catg-card-empty { aspect-ratio: 4/3; }
 }
 
 /* Card pequeña */
@@ -218,10 +218,10 @@
   overflow: hidden;
   text-decoration: none;
   position: relative;
-  aspect-ratio: unset;
-  min-height: 0;
+  aspect-ratio: 3/4;
 }
 .catg-card-empty {
+  aspect-ratio: 3/4;
   border-radius: 8px;
   background: transparent;
 }
