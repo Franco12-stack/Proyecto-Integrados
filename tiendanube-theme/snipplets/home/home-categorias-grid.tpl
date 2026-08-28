@@ -200,12 +200,11 @@
   overflow: hidden;
   text-decoration: none;
   position: relative;
-  height: 100%;
+  align-self: stretch;
 }
 @media (max-width: 767px) {
   .catg-card-featured {
     aspect-ratio: 4/3;
-    height: auto;
   }
   .catg-card-featured .catg-img {
     object-position: center 30%;
@@ -241,6 +240,8 @@
 
 /* Imagen compartida */
 .catg-img {
+  position: absolute;
+  inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
   display: block;
