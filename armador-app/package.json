@@ -1,0 +1,18 @@
+{
+  "name": "armador-app",
+  "version": "1.0.0",
+  "description": "App privada de Tienda Nube: precios de Odoo en el Armador de PC + creación de pedidos con precio custom",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "pg": "^8.12.0",
+    "axios": "^1.7.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "better-sqlite3": "^11.1.2"
+  }
+}
