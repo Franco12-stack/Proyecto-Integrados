@@ -17,12 +17,15 @@ router.get('/prices', async (req, res) => {
   }
 });
 
-// POST /api/orders  { store_id, customer, items, note }
+// POST /api/orders  { store_id, customer: {name, lastname, email, phone}, items: [{variant_id, quantity, catalogPrice, odooPrice}], note }
 router.post('/orders', async (req, res) => {
   const { store_id, customer, items, note } = req.body;
 
   if (!store_id || !items?.length) {
     return res.status(400).json({ error: 'Faltan store_id o items' });
+  }
+  if (!customer?.name || !customer?.lastname || !customer?.email) {
+    return res.status(400).json({ error: 'Faltan datos del cliente (nombre, apellido, email)' });
   }
 
   const tokenRow = getToken(store_id);
@@ -31,14 +34,14 @@ router.post('/orders', async (req, res) => {
   }
 
   try {
-    const { checkoutUrl, order } = await createDraftOrder({
+    const { checkoutUrl, draftOrder } = await createDraftOrder({
       storeId: store_id,
       accessToken: tokenRow.access_token,
       customer,
       items,
       note,
     });
-    res.json({ checkoutUrl, orderId: order.id });
+    res.json({ checkoutUrl, draftOrderId: draftOrder.id });
   } catch (err) {
     console.error('Error creando pedido en Tienda Nube:', err.response?.data || err.message);
     res.status(500).json({ error: 'No se pudo crear el pedido' });

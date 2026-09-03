@@ -1,70 +1,75 @@
 # Armador App — backend
 
-App privada de Tienda Nube para el "Armá tu PC": muestra precios de la lista de Odoo y
-cierra el pedido en Tienda Nube (queda pendiente de pago) para que la integración
-Tienda Nube ↔ Odoo ya existente lo sincronice.
+App a medida de Tienda Nube para el "Armá tu PC": muestra precios de la lista de Odoo
+y genera un pedido preliminar (Draft Order) en Tienda Nube — el cliente termina la
+compra en el checkout nativo (mismos medios de pago y analizador de fraude de
+siempre) y queda pendiente de pago. La integración Tienda Nube ↔ Odoo ya existente
+sincroniza el pedido apenas se confirma.
 
-## 1. Crear la app en Tienda Nube Partners
+## 1. Token de la app (Aplicaciones a medida)
 
-1. Entrá a https://partners.tiendanube.com → Mis apps → Crear app.
-2. Tipo: **App privada** (uso interno, no se publica en el store de apps).
-3. Redirect URI: `https://TU-DOMINIO/auth/callback`
-4. Alcances (scopes) necesarios:
-   - `write_orders` (crear pedidos)
-   - `read_products` (leer variant_id, stock, etc. del catálogo)
-5. Guardá el `Client ID` y `Client Secret` → van en `.env`.
-6. Instalá la app en la tienda integradosargentinos: te va a pedir autorizar y
-   redirigir a `/auth/callback`, que guarda el token en la base local (SQLite).
+Se creó desde el admin de la tienda (Configuración → Aplicaciones a medida →
+Crear), no requiere OAuth. Permisos tildados:
+
+- **Productos**: Lectura
+- **Pedidos**: Lectura y escritura
+- **Pedidos manuales** (Draft Orders): Lectura y escritura
+
+Al crearla te da un **Access Token** una sola vez — guardalo, no se puede volver a ver.
 
 ## 2. Configurar variables de entorno
 
 ```bash
 cp .env.example .env
-# completar TN_CLIENT_ID, TN_CLIENT_SECRET, TN_APP_URL
 # completar ODOO_PG_* con el usuario de solo lectura
 # completar ODOO_PRICELIST_ID con el id de la lista de precios a usar
 ```
 
 > El query en `src/services/odooPrices.js` asume el esquema estándar de Odoo
 > (`product_pricelist_item` + `product_template.default_code` como SKU). Si la
-> lista de precios usa otra tabla/lógica (por ejemplo reglas por categoría en vez
-> de precio fijo por producto), hay que ajustar ese archivo — pasame el nombre
-> real de la lista en Odoo y reviso el query.
+> lista de precios usa otra tabla/lógica, hay que ajustar ese archivo.
 
-## 3. Instalar y correr
+## 3. Instalar, cargar el token y correr
 
 ```bash
 npm install
+node scripts/set-token.js 6990490 EL_ACCESS_TOKEN_QUE_TE_DIO_TIENDA_NUBE
 npm start        # producción
 npm run dev       # con auto-reload
 ```
 
 Recomendado correrlo con `pm2` o como servicio systemd en el VPS, detrás de Nginx
-con HTTPS (Tienda Nube exige que el redirect URI sea https).
+con HTTPS.
 
 ## 4. Endpoints
 
-- `GET /auth/callback` — usado por Tienda Nube en la instalación (OAuth).
-- `GET /api/prices?skus=SKU1,SKU2&store_id=...` — precios de Odoo para esos SKUs.
-- `POST /api/orders` — crea el pedido en Tienda Nube con precio custom por línea:
+- `GET /api/prices?skus=SKU1,SKU2&store_id=6990490` — precios de Odoo para esos SKUs.
+- `POST /api/orders` — crea el Draft Order en Tienda Nube:
   ```json
   {
-    "store_id": "123456",
-    "customer": { "name": "...", "email": "..." },
+    "store_id": "6990490",
+    "customer": { "name": "Juan", "lastname": "Pérez", "email": "juan@mail.com", "phone": "3411234567" },
     "items": [
-      { "variant_id": 111, "quantity": 1, "price": 250000, "name": "Ryzen 5 5600" }
+      { "variant_id": 111, "quantity": 1, "catalogPrice": 300000, "odooPrice": 250000 }
     ],
     "note": "Armado desde /arma-tu-pc/"
   }
   ```
-  Responde `{ "checkoutUrl": "...", "orderId": ... }` — ese link es el que se le
-  muestra al cliente para que complete datos, envío y quede pendiente de pago.
+  Responde `{ "checkoutUrl": "...", "draftOrderId": ... }`. Ese link se le muestra
+  al cliente para completar envío/pago en el checkout nativo de Tienda Nube.
+
+  **Importante**: la API de Draft Orders no acepta precio custom por línea, solo
+  `variant_id`/`quantity`. Por eso el backend calcula la diferencia entre el precio
+  de catálogo (`catalogPrice`) y el de Odoo (`odooPrice`) por cada ítem, y la manda
+  como `discount` (monto fijo) a nivel de todo el pedido — así el total final
+  coincide con el precio de Odoo.
 
 ## Pendiente / a definir con el cliente
 
 - Conectar el frontend del armador (`/arma-tu-pc/`) para que llame a `/api/prices`
-  en vez de mostrar el precio de catálogo, y a `/api/orders` al finalizar.
+  (mostrando `odooPrice`) y a `/api/orders` al finalizar, mandando también el
+  `catalogPrice` de cada producto (lo trae la API de Productos de Tienda Nube).
 - Confirmar el esquema real de `ODOO_PRICELIST_ID` en Postgres.
-- Definir si el `customer` se pide dentro del armador o si Tienda Nube ya lo pide
-  en su propio checkout (recomendado: dejar que Tienda Nube pida los datos en el
-  checkout nativo, así no se duplica lógica).
+- Definir dónde se piden nombre/apellido/email del cliente antes de crear el Draft
+  Order (son obligatorios para crearlo) — puede ser un mini-form al final del
+  armador, antes de mandarlo al checkout.

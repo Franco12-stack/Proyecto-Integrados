@@ -12,36 +12,50 @@ function client(storeId, accessToken) {
 }
 
 /**
- * Crea un pedido en Tienda Nube con precios custom por línea (el precio de Odoo, no el de catálogo).
- * El pedido queda "open"/pendiente de pago; el checkout_url se le pasa al cliente para
- * que complete datos y método de envío/pago. La integración Tienda Nube↔Odoo ya existente
- * se encarga de sincronizarlo una vez creado.
+ * Crea un "draft order" (Orden preliminar) en Tienda Nube y devuelve su checkout_url.
  *
- * items: [{ variant_id, quantity, price, name }]
+ * Importante: el endpoint POST /draft_orders NO acepta precio custom por línea
+ * (solo variant_id, quantity, properties) — el precio de cada línea sale del
+ * catálogo de Tienda Nube. Para que el total coincida con el precio de Odoo,
+ * calculamos la diferencia (catálogo - Odoo) y la mandamos como `discount`
+ * (monto absoluto) a nivel de todo el pedido.
+ *
+ * items: [{ variant_id, quantity, catalogPrice, odooPrice }]
+ * customer: { name, lastname, email, phone? }
  */
 async function createDraftOrder({ storeId, accessToken, customer, items, note }) {
   const tn = client(storeId, accessToken);
 
+  const catalogSubtotal = items.reduce(
+    (acc, item) => acc + item.catalogPrice * item.quantity,
+    0
+  );
+  const odooSubtotal = items.reduce(
+    (acc, item) => acc + item.odooPrice * item.quantity,
+    0
+  );
+  const discount = Math.max(0, catalogSubtotal - odooSubtotal);
+
   const payload = {
-    customer,
+    contact_name: customer.name,
+    contact_lastname: customer.lastname,
+    contact_email: customer.email,
+    contact_phone: customer.phone,
+    payment_status: 'unpaid',
     products: items.map((item) => ({
       variant_id: item.variant_id,
       quantity: item.quantity,
-      price: item.price, // precio custom (de Odoo), pisa el precio de catálogo
-      name: item.name,
     })),
+    discount: discount.toFixed(2),
+    discount_type: 'absolute',
     note,
-    status: 'open',
-    payment_status: 'pending',
-    gateway: 'other',
   };
 
-  const { data } = await tn.post('/orders', payload);
+  const { data } = await tn.post('/draft_orders', payload);
 
-  // Tienda Nube expone la URL de checkout del pedido para que el cliente termine la compra
   return {
-    order: data,
-    checkoutUrl: data.checkout_url || `https://www.tiendanube.com/checkout/order/${data.id}`,
+    draftOrder: data,
+    checkoutUrl: data.checkout_url,
   };
 }
 
