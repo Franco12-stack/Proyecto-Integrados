@@ -2,11 +2,11 @@ const axios = require('axios');
 
 function client(storeId, accessToken) {
   return axios.create({
-    baseURL: `https://api.tiendanube.com/v1/${storeId}`,
+    baseURL: `https://api.tiendanube.com/2025-03/${storeId}`,
     headers: {
-      Authentication: `bearer ${accessToken}`,
+      Authorization: `Bearer ${accessToken}`,
       'User-Agent': 'ArmadorApp (contacto@integradosargentinos.com)',
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json; charset=utf-8',
     },
   });
 }
