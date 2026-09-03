@@ -25,3 +25,6 @@ build/
 # Credenciales - NUNCA subir
 src/config/Secrets.h
 server/.env
+
+# Copia local del tema completo bajado por FTP (referencia, no se versiona)
+armador-frontend-existente/
