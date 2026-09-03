@@ -43,6 +43,10 @@ con HTTPS.
 
 ## 4. Endpoints
 
+- `GET /api/products?category_id=123&store_id=6990490&per_page=200` — lista de
+  productos de una categoría. Reemplaza al viejo proxy en Vercel (`tn-proxy`,
+  `tn-proxy-sandy.vercel.app`) que usaba el armador en producción — mismo
+  contrato, así el cambio en el JS del frontend es solo la URL base.
 - `GET /api/prices?skus=SKU1,SKU2&store_id=6990490` — precios de Odoo para esos SKUs.
 - `POST /api/orders` — crea el Draft Order en Tienda Nube:
   ```json
@@ -66,10 +70,20 @@ con HTTPS.
 
 ## Pendiente / a definir con el cliente
 
-- Conectar el frontend del armador (`/arma-tu-pc/`) para que llame a `/api/prices`
-  (mostrando `odooPrice`) y a `/api/orders` al finalizar, mandando también el
-  `catalogPrice` de cada producto (lo trae la API de Productos de Tienda Nube).
+- En el theme (`templates/page.tpl`, bloque `{% if template == 'page.arma-tu-pc' %}`),
+  cambiar `CFG.proxyUrl` de `https://tn-proxy-sandy.vercel.app` a la URL de este
+  backend, y sumar `&store_id=6990490` a los fetch de `/api/products`.
+- Reemplazar `cartAdd()` (que hoy hace `POST /comprar/` al carrito nativo) por una
+  llamada a `POST /api/orders` de este backend + redirect al `checkoutUrl` que
+  devuelve, en vez de `window.location.href='/comprar/'`.
+- Agregar al final del armador un mini-form (nombre, apellido, email) — son
+  obligatorios para crear el Draft Order — antes de llamar a `/api/orders`.
+- Mandar también el `catalogPrice` de cada producto en `items` (ya viene en la
+  respuesta de `/api/products`, en `variants[0].price`).
 - Confirmar el esquema real de `ODOO_PRICELIST_ID` en Postgres.
-- Definir dónde se piden nombre/apellido/email del cliente antes de crear el Draft
-  Order (son obligatorios para crearlo) — puede ser un mini-form al final del
-  armador, antes de mandarlo al checkout.
+- Dar de baja el proxy viejo en Vercel (`tn-proxy`) y rotar el token de Tienda
+  Nube que tiene hardcodeado, una vez migrado.
+- Hay 3 versiones viejas/huérfanas del armador dando vueltas en el FTP
+  (`página.arma-tu-pc.tpl`, `page.arma-tu-pc.tpl`, `pc-builder.js` +
+  `snipplets/armador-pc.tpl`) que no están en uso — conviene borrarlas del
+  servidor para no generar confusión a futuro.
