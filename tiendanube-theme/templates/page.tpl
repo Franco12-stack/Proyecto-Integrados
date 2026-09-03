@@ -1033,22 +1033,23 @@ var CACHE_TTL = 5 * 60 * 1000; /* 5 minutos */
 function $(id){return document.getElementById(id);}
 function fmt(n){return '$'+parseFloat(n||0).toLocaleString('es-AR',{minimumFractionDigits:0,maximumFractionDigits:0});}
 function nameStr(p){var n=p.name;if(!n)return '';if(typeof n==='object')return n.es||n.pt||Object.values(n)[0]||'';return n;}
-/* precio de lista (tarjeta/cuotas) = variants[0].price */
+/* precio de lista (tarjeta/cuotas) = precio de Odoo si está cargado, si no el de catálogo (variants[0].price) */
 function price(p){
+  if(p._odooPrice!=null) return p._odooPrice;
   var v0=p.variants&&p.variants[0]?p.variants[0]:null;
   if(!v0) return 0;
   return parseFloat(v0.price||0);
 }
-/* precio transferencia:
-   - Si la API trae promotional_price válido (< price), ese ES el precio real
+/* precio transferencia, calculado sobre el precio base de price() (Odoo o catálogo):
+   - Si la API trae promotional_price válido (< card), ese ES el precio real
    - Si no: descuento exacto = card × (1 - surcharge/100)
      surcharge=25 → multiplica por 0.75 exacto (vs /1.33 que da 0.7519, error de ~$1000 en precios altos) */
 function transferPrice(p){
   var v0=p.variants&&p.variants[0]?p.variants[0]:null;
   if(!v0) return 0;
-  var card=parseFloat(v0.price||0);
+  var card=price(p);
   var promo=parseFloat(v0.promotional_price||0);
-  if(promo>0&&promo<card) return Math.round(promo);
+  if(p._odooPrice==null && promo>0&&promo<card) return Math.round(promo);
   return Math.round(card*(1-CFG.surcharge/100));
 }
 function img(p){if(!p.images||!p.images.length)return null;var i=p.images[0];return i.src||i.url||(typeof i==='string'?i:null);}
@@ -1208,7 +1209,29 @@ function fetchCat(catId) {
         });
       });
     })
+    .then(attachOdooPrices)
     .catch(function(){return[];});
+}
+
+/* Trae de una sola vez el precio de Odoo de todos los SKUs de la categoría,
+   y lo deja guardado en p._odooPrice — de ahí en más price()/transferPrice()
+   lo usan automáticamente en toda la UI (grilla, resumen, total). */
+function attachOdooPrices(prods){
+  var skus=prods.map(function(p){var v0=p.variants&&p.variants[0];return v0&&v0.sku;}).filter(Boolean);
+  if(!skus.length) return prods;
+  var url=CFG.proxyUrl+'/api/prices?store_id='+CFG.storeId+'&skus='+encodeURIComponent(skus.join(','));
+  return fetch(url)
+    .then(function(r){return r.ok?r.json():{prices:{}};})
+    .then(function(d){
+      var odooPrices=d.prices||{};
+      prods.forEach(function(p){
+        var v0=p.variants&&p.variants[0];
+        var sku=v0&&v0.sku;
+        if(sku && odooPrices[sku]!==undefined) p._odooPrice=parseFloat(odooPrices[sku]);
+      });
+      return prods;
+    })
+    .catch(function(){return prods;}); /* si falla, se sigue mostrando el precio de catálogo */
 }
 
 /* Arma el pedido con precio de Odoo vía el backend propio (Armador App) y
@@ -1557,7 +1580,8 @@ window.APC = {
           variantId: v0?v0.id:null,
           sku: v0?v0.sku:null,
           qty: item.qty,
-          catalogPrice: price(item.product),
+          /* precio de catálogo real (no price(), que ya devuelve el de Odoo si está cargado) */
+          catalogPrice: v0?parseFloat(v0.price||0):0,
         });
       });
     });
