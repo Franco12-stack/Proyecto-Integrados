@@ -863,7 +863,7 @@
    ===================================================== */
 var CFG = {
   storeId:  '6990490',
-  proxyUrl: 'https://parish-privacy-tracks-grand.trycloudflare.com',
+  proxyUrl: 'https://armador.integradosargentinos.com',
   cats: {
     cpu:      { id: 36289644, name: 'Procesador',        icon: '⚙️',  req: true  },
     mother:   { id: 36289548, name: 'Placa Madre',        icon: '🔌',  req: true  },
