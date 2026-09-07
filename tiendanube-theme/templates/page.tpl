@@ -1038,7 +1038,7 @@ function nameStr(p){var n=p.name;if(!n)return '';if(typeof n==='object')return n
      se calcula agregándole el recargo (no restándoselo).
    - Si no hay precio de Odoo, es el de catálogo (variants[0].price). */
 function price(p){
-  if(p._odooPrice!=null) return Math.round(p._odooPrice/(1-CFG.surcharge/100));
+  if(p._odooPrice!=null) return Math.ceil(p._odooPrice/(1-CFG.surcharge/100));
   var v0=p.variants&&p.variants[0]?p.variants[0]:null;
   if(!v0) return 0;
   return parseFloat(v0.price||0);
@@ -1048,7 +1048,7 @@ function price(p){
    - Si no: promotional_price si la API la trae válida, si no card × (1 - surcharge/100)
      surcharge=25 → multiplica por 0.75 exacto (vs /1.33 que da 0.7519, error de ~$1000 en precios altos) */
 function transferPrice(p){
-  if(p._odooPrice!=null) return Math.round(p._odooPrice);
+  if(p._odooPrice!=null) return Math.ceil(p._odooPrice);
   var v0=p.variants&&p.variants[0]?p.variants[0]:null;
   if(!v0) return 0;
   var card=price(p);
