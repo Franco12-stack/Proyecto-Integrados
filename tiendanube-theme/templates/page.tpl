@@ -1567,10 +1567,12 @@ window.APC = {
   search: function(q){S.query=q;R.grid();},
 
   addAll: function(){
-    var name=prompt('Nombre:');if(!name)return;
-    var lastname=prompt('Apellido:');if(!lastname)return;
-    var email=prompt('Email:');if(!email)return;
-    var phone=prompt('Teléfono (opcional):')||'';
+    /* Datos de contacto obligatorios para crear el Draft Order — placeholders,
+       el cliente completa sus datos reales en el checkout nativo de Tienda Nube. */
+    var name='Cliente';
+    var lastname='Armador';
+    var email='armador+'+Date.now()+'@integradosargentinos.com';
+    var phone='';
 
     var btn=$('apcBtnCart');
     btn.disabled=true;
