@@ -1238,36 +1238,31 @@ function attachOdooPrices(prods){
     .catch(function(){return prods;}); /* si falla, se sigue mostrando el precio de catálogo */
 }
 
-/* Arma el pedido con precio de Odoo vía el backend propio (Armador App) y
-   devuelve la URL de checkout de Tienda Nube para completar la compra ahí. */
+/* Arma el pedido en el backend propio (Armador App) y devuelve la URL de
+   checkout de Tienda Nube para completar la compra ahí.
+   Usa el precio de Odoo que YA se le mostró al cliente en pantalla (items[].odooPrice,
+   tomado de p._odooPrice al armar la grilla) en vez de volver a consultarlo acá —
+   así lo que ve es exactamente lo que se cobra, sin una segunda consulta que pueda
+   fallar para algún SKU puntual y dejarlo sin descuento. */
 function createOrderViaBackend(items, customer){
-  var skus=items.map(function(i){return i.sku;}).filter(Boolean);
-  var pricesUrl=CFG.proxyUrl+'/api/prices?store_id='+CFG.storeId+'&skus='+encodeURIComponent(skus.join(','));
-
-  return fetch(pricesUrl)
-    .then(function(r){return r.json();})
-    .then(function(d){
-      var odooPrices=d.prices||{};
-      var orderItems=items.map(function(i){
-        return {
-          variant_id: i.variantId,
-          quantity: i.qty,
-          catalogPrice: i.catalogPrice,
-          /* si no hay precio especial cargado en Odoo para ese SKU, se cobra el de catálogo */
-          odooPrice: (i.sku && odooPrices[i.sku] !== undefined) ? odooPrices[i.sku] : i.catalogPrice,
-        };
-      });
-      return fetch(CFG.proxyUrl+'/api/orders',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-          store_id: CFG.storeId,
-          customer: customer,
-          items: orderItems,
-          note: 'Armado desde /arma-tu-pc/',
-        }),
-      });
-    })
+  var orderItems=items.map(function(i){
+    return {
+      variant_id: i.variantId,
+      quantity: i.qty,
+      catalogPrice: i.catalogPrice,
+      odooPrice: i.odooPrice,
+    };
+  });
+  return fetch(CFG.proxyUrl+'/api/orders',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      store_id: CFG.storeId,
+      customer: customer,
+      items: orderItems,
+      note: 'Armado desde /arma-tu-pc/',
+    }),
+  })
     .then(function(r){return r.json();})
     .then(function(d){
       if(!d.checkoutUrl) throw new Error(d.error||'No se pudo crear el pedido');
@@ -1582,12 +1577,15 @@ window.APC = {
     Object.keys(S.sel).forEach(function(k){
       selArr(k).forEach(function(item){
         var v0=item.product.variants&&item.product.variants[0];
+        var catalogPrice=v0?parseFloat(v0.price||0):0;
         items.push({
           variantId: v0?v0.id:null,
           sku: v0?v0.sku:null,
           qty: item.qty,
           /* precio de catálogo real (no price(), que ya devuelve el de Odoo si está cargado) */
-          catalogPrice: v0?parseFloat(v0.price||0):0,
+          catalogPrice: catalogPrice,
+          /* mismo precio ya mostrado en pantalla (transferPrice) — si no hay de Odoo, cae al de catálogo */
+          odooPrice: item.product._odooPrice!=null ? item.product._odooPrice : catalogPrice,
         });
       });
     });
