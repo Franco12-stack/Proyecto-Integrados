@@ -29,3 +29,4 @@ server/.env
 # Copia local del tema completo bajado por FTP (referencia, no se versiona)
 armador-frontend-existente/
 obsidian-tiendanube/
+obsidian-tiendanube.zip
