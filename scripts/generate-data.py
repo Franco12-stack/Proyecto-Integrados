@@ -59,6 +59,25 @@ ROWS = [
     ("psu-cv550", "PSU-CV550", "Corsair CV550 550W 80+ Bronze", "psu", 49, 18, True, {}),
     ("psu-rm750e", "PSU-RM750E", "Corsair RM750e 750W 80+ Gold", "psu", 104, 12, True, {}),
     ("psu-focus-850", "PSU-FOCUS-850", "Seasonic Focus GX-850 850W 80+ Gold", "psu", 132, 6, True, {}),
+    # --- operating systems
+    ("os-win11-home", "OS-WIN11-HOME", "Microsoft Windows 11 Home 64-bit OEM", "os", 92, 40, True, {}),
+    ("os-win11-pro", "OS-WIN11-PRO", "Microsoft Windows 11 Pro 64-bit OEM", "os", 128, 30, True, {}),
+    ("os-ubuntu-setup", "OS-UBUNTU-SETUP", "Ubuntu 24.04 LTS install and setup service", "os", 14, 99, True, {}),
+    # --- connectivity
+    ("net-tx20e", "NET-TX20E", "TP-Link TX20E WiFi 6 PCIe card with Bluetooth 5.2", "connectivity", 29, 25, True, {}),
+    ("net-axe59", "NET-AXE59", "ASUS PCE-AXE59BT WiFi 6E PCIe card", "connectivity", 52, 11, True, {}),
+    ("net-ub500", "NET-UB500", "TP-Link UB500 Bluetooth 5.3 USB adapter", "connectivity", 9, 60, True, {}),
+    # --- monitors
+    ("mon-24-ips", "MON-24-IPS", "LG 24 inch Full HD IPS 100Hz monitor", "monitor", 96, 14, True, {}),
+    ("mon-27-qhd", "MON-27-QHD", "Gigabyte 27 inch QHD IPS 165Hz gaming monitor", "monitor", 188, 9, True, {}),
+    ("mon-27-4k", "MON-27-4K", "Dell 27 inch 4K UHD IPS monitor", "monitor", 279, 5, False, {}),
+    ("mon-32-curved", "MON-32-CURVED", "Samsung Odyssey 32 inch curved QHD 165Hz monitor", "monitor", 238, 6, True, {}),
+    # --- peripherals
+    ("per-kb-mech", "PER-KB-MECH", "Redragon Kumara mechanical keyboard", "peripherals", 31, 30, True, {}),
+    ("per-mouse-g203", "PER-MOUSE-G203", "Logitech G203 gaming mouse", "peripherals", 17, 45, True, {}),
+    ("per-headset-h390", "PER-HEADSET-H390", "Logitech H390 USB headset", "peripherals", 29, 20, True, {}),
+    ("per-webcam-c920", "PER-WEBCAM-C920", "Logitech C920 HD Pro webcam", "peripherals", 54, 12, True, {}),
+    ("per-pad-xl", "PER-PAD-XL", "Razer Gigantus XL mouse pad", "peripherals", 12, 35, True, {}),
 ]
 
 # Products the ERP has no special price for: they fall back to the normal list price.

@@ -1,6 +1,3 @@
-import { createApi } from './api.js';
-
-const page = document.querySelector('#page');
 const esc = (value) =>
   String(value).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
@@ -10,13 +7,13 @@ function money(order, amount, digits = 2) {
 
 function linesPanel(order) {
   const rows = order.lines.map((l) => `<tr>
-      <td>${esc(l.name)} ${l.published ? '' : '<span class="tag hidden">hidden in storefront</span>'}</td>
+      <td>${esc(l.name)} ${l.published ? '' : '<span class="apc-tag tag-hidden">hidden in storefront</span>'}</td>
       <td>${l.quantity}</td>
       <td>${money(order, l.catalogPrice * l.quantity, 0)}</td>
       <td>${money(order, l.wholesalePrice * l.quantity, 0)}</td>
     </tr>`).join('');
   return `<section class="panel"><h2>Order #${esc(order.id)}</h2>
-    <table><tr><th>Item</th><th>Qty</th><th>List price</th><th>Price-list (transfer)</th></tr>${rows}</table></section>`;
+    <div class="tbl-wrap"><table><tr><th>Item</th><th>Qty</th><th>List price</th><th>Price-list (transfer)</th></tr>${rows}</table></div></section>`;
 }
 
 function totalsPanel(order, payment) {
@@ -52,15 +49,18 @@ function explanationPanel(order) {
     ${order.clamped ? '<p class="warn">Some list prices are below the target, so the coupon was clamped at 0 for this order.</p>' : ''}</section>`;
 }
 
-function render(order, payment) {
-  page.innerHTML = `<p><a href="./">← Back to the configurator</a></p>${linesPanel(order)}${totalsPanel(order, payment)}${explanationPanel(order)}`;
-  page.querySelectorAll('input[name="pay"]').forEach((input) => input.addEventListener('change', () => render(order, input.value)));
+const BACK = '<a class="co-back" href="#build">← Back to the configurator</a>';
+
+function render(page, order, payment) {
+  page.innerHTML = `${BACK}${linesPanel(order)}${totalsPanel(order, payment)}${explanationPanel(order)}`;
+  page.querySelectorAll('input[name="pay"]').forEach((input) => input.addEventListener('change', () => render(page, order, input.value)));
 }
 
-try {
-  const id = new URLSearchParams(location.search).get('id');
-  const api = await createApi();
-  render(await api.getOrder(id), 'transfer');
-} catch (error) {
-  page.innerHTML = `<p class="error">${esc(error.message)}</p><p><a href="./">← Back to the configurator</a></p>`;
+/** Render the simulated platform checkout for an order into `page`. */
+export async function show(id, page, api) {
+  try {
+    render(page, await api.getOrder(id), 'transfer');
+  } catch (error) {
+    page.innerHTML = `${BACK}<p class="error">${esc(error.message)}</p>`;
+  }
 }

@@ -21,6 +21,10 @@ platform that has no concept of it**, without ever charging a customer the wrong
 
 ## Features
 
+- **Full 12-step builder**: processor, motherboard, memory, storage, graphics, cooling, case, power supply, OS, connectivity, monitor and peripherals; optional steps can be skipped, multi-item steps take quantities, and picking a single part advances to the next step.
+- **Product images**: every product gets a generated SVG illustration (no photo assets needed).
+- **Quote view**: build a printable quote with both payment prices and download it as HTML.
+- **Responsive**: sidebar on desktop, floating total bar plus drawer on phones.
 - **Compatibility engine**: CPU/motherboard socket, DDR4 vs DDR5, with the LGA1700 special case (the board decides the memory type). Incompatible parts are hidden or disabled.
 - **Power estimate and PSU recommendation**, with a warning when the chosen PSU is too small.
 - **Wholesale pricing** shown live while building: bank-transfer price and credit-card price.
@@ -28,9 +32,9 @@ platform that has no concept of it**, without ever charging a customer the wrong
 - **Server-authoritative orders**: the client only sends product IDs and quantities; prices are resolved on the server.
 - **Two run modes** sharing the same core code: an Express API, or a fully static in-browser mode for GitHub Pages.
 
-| Checkout | |
-|---|---|
-| ![Checkout](docs/img/checkout.png) | The checkout page simulates the platform: it applies its own transfer discount after the coupon and shows what a naive coupon would have charged. |
+![Checkout](docs/img/checkout.png)
+
+The checkout view simulates the platform: it applies its own transfer discount after the coupon and shows what a naive coupon would have charged.
 
 ## The interesting problem: pricing under platform constraints
 
@@ -135,7 +139,7 @@ Errors: `400` invalid input · `409` prices changed · `422` unknown product / o
 ```
 src/core/     pure business logic (pricing, compat, power, orders)
 src/server/   Express app + fictional data (products, price list, config)
-src/web/      vanilla-JS UI: configurator, checkout, API layer (server or in-browser)
+src/web/      vanilla-JS UI: configurator, checkout view, product art, API layer (server or in-browser)
 test/         unit, property and HTTP tests
 scripts/      data generator and static-site builder
 ```

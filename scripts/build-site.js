@@ -14,7 +14,7 @@ cpSync(join(root, 'src', 'core'), join(site, 'core'), { recursive: true });
 cpSync(join(root, 'src', 'server', 'data'), join(site, 'data'), { recursive: true });
 writeFileSync(join(site, '.nojekyll'), '');
 
-for (const page of ['index.html', 'checkout.html']) {
+for (const page of ['index.html']) {
   const file = join(site, page);
   const html = readFileSync(file, 'utf8');
   if (!html.includes('<meta charset="utf-8">')) throw new Error(`${page}: expected charset meta to anchor the mode tag`);

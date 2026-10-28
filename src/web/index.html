@@ -5,32 +5,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PCForge — wholesale-priced PC configurator (demo)</title>
   <meta name="description" content="Demo: PC configurator with a compatibility engine, price-list pricing and a draft-order checkout.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%2338bdf8%27/%3E%3Cpath d=%27M9 22V10h8a4 4 0 010 8h-5%27 stroke=%27%2304121c%27 stroke-width=%273%27 fill=%27none%27/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%231BA9E2%27/%3E%3Cpath d=%27M9 22V10h8a4 4 0 010 8h-5%27 stroke=%27%23fff%27 stroke-width=%273%27 fill=%27none%27/%3E%3C/svg%3E">
 </head>
 <body>
-  <header class="top">
-    <a class="brand" href="./">PCForge<span class="badge">demo · fictional data</span></a>
-    <div id="mode" class="mode"></div>
-  </header>
+  <div id="app">
+    <header class="apc-header">
+      <h1>Build your <span>PC</span></h1>
+      <p>Pick each part and send them to checkout in one go <span class="badge">demo · fictional data</span> <span id="mode" class="mode"></span></p>
+    </header>
 
-  <main class="layout">
-    <section>
-      <nav id="tabs" class="tabs" aria-label="Component categories"></nav>
-      <div class="toolbar">
-        <input id="search" type="search" placeholder="Search in this category…" aria-label="Search">
-        <label><input id="hideIncompatible" type="checkbox" checked> Hide incompatible</label>
-        <label><input id="includeHidden" type="checkbox" checked> Include products hidden from the storefront</label>
+    <div id="builder" class="apc-body">
+      <div class="apc-main">
+        <nav id="tabs" class="apc-tabs" aria-label="Component categories"></nav>
+        <section class="apc-panel">
+          <div class="apc-panel-head">
+            <div id="title" class="apc-panel-title"></div>
+            <div class="apc-panel-actions">
+              <button id="skip" class="apc-skip-btn" data-act="skip">Skip this step</button>
+              <button class="apc-refresh-btn" data-act="refresh" title="Reload products and prices" aria-label="Reload products and prices">↻</button>
+            </div>
+          </div>
+          <div class="apc-search-wrap">
+            <input id="search" class="apc-search" type="search" placeholder="Search…" aria-label="Search products">
+            <label class="apc-check"><input id="showIncompatible" type="checkbox"> Show incompatible</label>
+            <label class="apc-check"><input id="includeHidden" type="checkbox" checked> Include products hidden from the storefront</label>
+            <span id="filterCount" class="apc-filter-count"></span>
+          </div>
+          <div id="notice"></div>
+          <div id="grid" class="apc-grid"></div>
+          <div id="nextWrap"></div>
+        </section>
       </div>
-      <div id="grid" class="grid"></div>
-    </section>
 
-    <aside class="summary" aria-label="Your build">
-      <h2>Your build</h2>
-      <div id="summary"></div>
-    </aside>
-  </main>
+      <aside class="apc-sidebar" aria-label="Your build">
+        <div id="summary" class="sum-card"></div>
+      </aside>
+    </div>
 
+    <main id="page" class="co-page" hidden></main>
+
+    <div id="mobileBar" class="apc-mobile-bar">
+      <div class="apc-mobile-bar-info"><span id="mobileCount" class="apc-mobile-bar-count"></span><span id="mobileTotal" class="apc-mobile-bar-total"></span></div>
+      <button class="apc-mobile-bar-btn" data-act="open-drawer">View build</button>
+    </div>
+    <div id="drawerOverlay" class="apc-mobile-overlay" data-act="close-drawer"></div>
+    <div id="drawer" class="apc-mobile-drawer"></div>
+
+    <div id="modal" class="apc-overlay" data-act="close-modal"><div id="modalBody" class="apc-modal" role="dialog" aria-modal="true"></div></div>
+    <div id="toast" class="apc-toast" role="status" aria-live="polite" hidden></div>
+  </div>
   <script type="module" src="app.js"></script>
 </body>
 </html>

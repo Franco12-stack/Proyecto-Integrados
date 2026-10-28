@@ -38,7 +38,11 @@ async function browserApi() {
     ['config', 'products', 'pricelist'].map((name) => fetch(`data/${name}.json`).then(parse)),
   );
   const STORAGE_KEY = 'pcforge:orders';
-  const stored = () => JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}');
+  // localStorage can be unavailable (private mode, sandboxed frames): orders then live in memory only.
+  const memory = {};
+  const stored = () => {
+    try { return { ...JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}'), ...memory }; } catch { return { ...memory }; }
+  };
 
   return {
     mode: 'browser',
@@ -51,7 +55,8 @@ async function browserApi() {
         createdAt: new Date().toISOString(),
         ...buildOrder({ ...payload, products, priceList, config }),
       };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...stored(), [order.id]: order }));
+      memory[order.id] = order;
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(stored())); } catch { /* memory only */ }
       return order;
     },
     getOrder: async (id) => {

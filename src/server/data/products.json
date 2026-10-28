@@ -471,5 +471,155 @@
     "stock": 6,
     "published": true,
     "attributes": {}
+  },
+  {
+    "id": "os-win11-home",
+    "sku": "OS-WIN11-HOME",
+    "name": "Microsoft Windows 11 Home 64-bit OEM",
+    "category": "os",
+    "price": 129,
+    "stock": 40,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "os-win11-pro",
+    "sku": "OS-WIN11-PRO",
+    "name": "Microsoft Windows 11 Pro 64-bit OEM",
+    "category": "os",
+    "price": 170,
+    "stock": 30,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "os-ubuntu-setup",
+    "sku": "OS-UBUNTU-SETUP",
+    "name": "Ubuntu 24.04 LTS install and setup service",
+    "category": "os",
+    "price": 20,
+    "stock": 99,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "net-tx20e",
+    "sku": "NET-TX20E",
+    "name": "TP-Link TX20E WiFi 6 PCIe card with Bluetooth 5.2",
+    "category": "connectivity",
+    "price": 40,
+    "stock": 25,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "net-axe59",
+    "sku": "NET-AXE59",
+    "name": "ASUS PCE-AXE59BT WiFi 6E PCIe card",
+    "category": "connectivity",
+    "price": 72,
+    "stock": 11,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "net-ub500",
+    "sku": "NET-UB500",
+    "name": "TP-Link UB500 Bluetooth 5.3 USB adapter",
+    "category": "connectivity",
+    "price": 13,
+    "stock": 60,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "mon-24-ips",
+    "sku": "MON-24-IPS",
+    "name": "LG 24 inch Full HD IPS 100Hz monitor",
+    "category": "monitor",
+    "price": 140,
+    "stock": 14,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "mon-27-qhd",
+    "sku": "MON-27-QHD",
+    "name": "Gigabyte 27 inch QHD IPS 165Hz gaming monitor",
+    "category": "monitor",
+    "price": 270,
+    "stock": 9,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "mon-27-4k",
+    "sku": "MON-27-4K",
+    "name": "Dell 27 inch 4K UHD IPS monitor",
+    "category": "monitor",
+    "price": 392,
+    "stock": 5,
+    "published": false,
+    "attributes": {}
+  },
+  {
+    "id": "mon-32-curved",
+    "sku": "MON-32-CURVED",
+    "name": "Samsung Odyssey 32 inch curved QHD 165Hz monitor",
+    "category": "monitor",
+    "price": 339,
+    "stock": 6,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "per-kb-mech",
+    "sku": "PER-KB-MECH",
+    "name": "Redragon Kumara mechanical keyboard",
+    "category": "peripherals",
+    "price": 43,
+    "stock": 30,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "per-mouse-g203",
+    "sku": "PER-MOUSE-G203",
+    "name": "Logitech G203 gaming mouse",
+    "category": "peripherals",
+    "price": 25,
+    "stock": 45,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "per-headset-h390",
+    "sku": "PER-HEADSET-H390",
+    "name": "Logitech H390 USB headset",
+    "category": "peripherals",
+    "price": 40,
+    "stock": 20,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "per-webcam-c920",
+    "sku": "PER-WEBCAM-C920",
+    "name": "Logitech C920 HD Pro webcam",
+    "category": "peripherals",
+    "price": 73,
+    "stock": 12,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "per-pad-xl",
+    "sku": "PER-PAD-XL",
+    "name": "Razer Gigantus XL mouse pad",
+    "category": "peripherals",
+    "price": 18,
+    "stock": 35,
+    "published": true,
+    "attributes": {}
   }
 ]
