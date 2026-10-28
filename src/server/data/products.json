@@ -1,0 +1,475 @@
+[
+  {
+    "id": "cpu-r5-5600",
+    "sku": "CPU-5600",
+    "name": "AMD Ryzen 5 5600 6-Core 3.5GHz",
+    "category": "cpu",
+    "price": 156,
+    "stock": 14,
+    "published": true,
+    "attributes": {
+      "socket": "AM4"
+    }
+  },
+  {
+    "id": "cpu-r7-5700x",
+    "sku": "CPU-5700X",
+    "name": "AMD Ryzen 7 5700X 8-Core 3.4GHz AM4",
+    "category": "cpu",
+    "price": 228,
+    "stock": 9,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "cpu-r5-7600",
+    "sku": "CPU-7600",
+    "name": "AMD Ryzen 5 7600 6-Core 3.8GHz",
+    "category": "cpu",
+    "price": 251,
+    "stock": 12,
+    "published": true,
+    "attributes": {
+      "socket": "AM5"
+    }
+  },
+  {
+    "id": "cpu-r7-7700x",
+    "sku": "CPU-7700X",
+    "name": "AMD Ryzen 7 7700X 8-Core 4.5GHz AM5",
+    "category": "cpu",
+    "price": 349,
+    "stock": 6,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "cpu-i5-12400f",
+    "sku": "CPU-12400F",
+    "name": "Intel Core i5-12400F 2.5GHz LGA1700",
+    "category": "cpu",
+    "price": 164,
+    "stock": 20,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "cpu-i5-13400f",
+    "sku": "CPU-13400F",
+    "name": "Intel Core i5-13400F 2.5GHz LGA1700",
+    "category": "cpu",
+    "price": 241,
+    "stock": 11,
+    "published": true,
+    "attributes": {
+      "socket": "LGA1700"
+    }
+  },
+  {
+    "id": "cpu-i7-14700k",
+    "sku": "CPU-14700K",
+    "name": "Intel Core i7-14700K 3.4GHz LGA1700",
+    "category": "cpu",
+    "price": 472,
+    "stock": 5,
+    "published": false,
+    "attributes": {}
+  },
+  {
+    "id": "cpu-ultra5-245k",
+    "sku": "CPU-U5-245K",
+    "name": "Intel Core Ultra 5 245K 4.2GHz",
+    "category": "cpu",
+    "price": 395,
+    "stock": 7,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "cpu-i3-10100",
+    "sku": "CPU-10100",
+    "name": "Intel Core i3-10100 3.6GHz LGA1200",
+    "category": "cpu",
+    "price": 116,
+    "stock": 0,
+    "published": false,
+    "attributes": {}
+  },
+  {
+    "id": "mb-b550m-a",
+    "sku": "MB-B550M-A",
+    "name": "ASUS PRIME B550M-A AM4 DDR4",
+    "category": "motherboard",
+    "price": 118,
+    "stock": 10,
+    "published": true,
+    "attributes": {
+      "socket": "AM4",
+      "ramType": "DDR4"
+    }
+  },
+  {
+    "id": "mb-b450m-pro",
+    "sku": "MB-B450M-PRO",
+    "name": "MSI B450M PRO-VDH MAX",
+    "category": "motherboard",
+    "price": 89,
+    "stock": 8,
+    "published": true,
+    "attributes": {
+      "ramType": "DDR4"
+    }
+  },
+  {
+    "id": "mb-b650m-ds3h",
+    "sku": "MB-B650M-DS3H",
+    "name": "Gigabyte B650M DS3H DDR5",
+    "category": "motherboard",
+    "price": 172,
+    "stock": 9,
+    "published": true,
+    "attributes": {
+      "socket": "AM5",
+      "ramType": "DDR5"
+    }
+  },
+  {
+    "id": "mb-x670e-pro",
+    "sku": "MB-X670E-PRO",
+    "name": "ASRock X670E Pro RS",
+    "category": "motherboard",
+    "price": 294,
+    "stock": 4,
+    "published": true,
+    "attributes": {
+      "ramType": "DDR5"
+    }
+  },
+  {
+    "id": "mb-b760m-d4",
+    "sku": "MB-B760M-D4",
+    "name": "MSI PRO B760M-E DDR4",
+    "category": "motherboard",
+    "price": 139,
+    "stock": 12,
+    "published": true,
+    "attributes": {
+      "ramType": "DDR4"
+    }
+  },
+  {
+    "id": "mb-b760m-d5",
+    "sku": "MB-B760M-D5",
+    "name": "ASUS PRIME B760M-A WIFI DDR5",
+    "category": "motherboard",
+    "price": 197,
+    "stock": 7,
+    "published": true,
+    "attributes": {
+      "ramType": "DDR5"
+    }
+  },
+  {
+    "id": "mb-z890-elite",
+    "sku": "MB-Z890-ELITE",
+    "name": "Gigabyte Z890 AORUS Elite DDR5",
+    "category": "motherboard",
+    "price": 415,
+    "stock": 3,
+    "published": false,
+    "attributes": {}
+  },
+  {
+    "id": "mb-h510m",
+    "sku": "MB-H510M",
+    "name": "MSI H510M-A PRO",
+    "category": "motherboard",
+    "price": 90,
+    "stock": 5,
+    "published": true,
+    "attributes": {
+      "ramType": "DDR4"
+    }
+  },
+  {
+    "id": "ram-d4-16",
+    "sku": "RAM-D4-16",
+    "name": "Kingston Fury Beast 16GB (1x16GB) DDR4-3200",
+    "category": "ram",
+    "price": 48,
+    "stock": 40,
+    "published": true,
+    "attributes": {
+      "ramType": "DDR4",
+      "modules": 1
+    }
+  },
+  {
+    "id": "ram-d4-32",
+    "sku": "RAM-D4-32",
+    "name": "Corsair Vengeance LPX 32GB (2x16GB) DDR4-3200",
+    "category": "ram",
+    "price": 88,
+    "stock": 25,
+    "published": true,
+    "attributes": {
+      "ramType": "DDR4",
+      "modules": 2
+    }
+  },
+  {
+    "id": "ram-d5-16",
+    "sku": "RAM-D5-16",
+    "name": "Kingston Fury Beast 16GB (1x16GB) DDR5-5600",
+    "category": "ram",
+    "price": 69,
+    "stock": 30,
+    "published": true,
+    "attributes": {
+      "ramType": "DDR5",
+      "modules": 1
+    }
+  },
+  {
+    "id": "ram-d5-32",
+    "sku": "RAM-D5-32",
+    "name": "Corsair Vengeance 32GB (2x16GB) DDR5-6000",
+    "category": "ram",
+    "price": 127,
+    "stock": 18,
+    "published": true,
+    "attributes": {
+      "modules": 2
+    }
+  },
+  {
+    "id": "ram-d5-32-z5",
+    "sku": "RAM-D5-32-Z5",
+    "name": "G.Skill Trident Z5 RGB 32GB (2x16GB) DDR5-6400",
+    "category": "ram",
+    "price": 175,
+    "stock": 6,
+    "published": false,
+    "attributes": {
+      "modules": 2
+    }
+  },
+  {
+    "id": "ssd-nv2-500",
+    "sku": "SSD-NV2-500",
+    "name": "Kingston NV2 500GB NVMe M.2 SSD",
+    "category": "storage",
+    "price": 42,
+    "stock": 50,
+    "published": true,
+    "attributes": {
+      "kind": "nvme"
+    }
+  },
+  {
+    "id": "ssd-sn580-1tb",
+    "sku": "SSD-SN580-1T",
+    "name": "WD Blue SN580 1TB NVMe M.2 SSD",
+    "category": "storage",
+    "price": 79,
+    "stock": 35,
+    "published": true,
+    "attributes": {
+      "kind": "nvme"
+    }
+  },
+  {
+    "id": "ssd-870evo-1tb",
+    "sku": "SSD-870EVO-1T",
+    "name": "Samsung 870 EVO 1TB SATA SSD",
+    "category": "storage",
+    "price": 102,
+    "stock": 22,
+    "published": true,
+    "attributes": {
+      "kind": "ssd"
+    }
+  },
+  {
+    "id": "hdd-barracuda-2tb",
+    "sku": "HDD-BARRA-2T",
+    "name": "Seagate Barracuda 2TB 7200rpm HDD",
+    "category": "storage",
+    "price": 70,
+    "stock": 15,
+    "published": true,
+    "attributes": {
+      "kind": "hdd"
+    }
+  },
+  {
+    "id": "gpu-gtx1650",
+    "sku": "GPU-GTX1650",
+    "name": "NVIDIA GeForce GTX 1650 4GB GDDR6",
+    "category": "gpu",
+    "price": 175,
+    "stock": 10,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "gpu-gtx1660s",
+    "sku": "GPU-GTX1660S",
+    "name": "NVIDIA GeForce GTX 1660 Super 6GB",
+    "category": "gpu",
+    "price": 201,
+    "stock": 0,
+    "published": false,
+    "attributes": {}
+  },
+  {
+    "id": "gpu-rtx3060",
+    "sku": "GPU-RTX3060",
+    "name": "NVIDIA GeForce RTX 3060 12GB",
+    "category": "gpu",
+    "price": 342,
+    "stock": 8,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "gpu-rtx4060",
+    "sku": "GPU-RTX4060",
+    "name": "NVIDIA GeForce RTX 4060 8GB",
+    "category": "gpu",
+    "price": 362,
+    "stock": 14,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "gpu-rtx4070s",
+    "sku": "GPU-RTX4070S",
+    "name": "NVIDIA GeForce RTX 4070 Super 12GB",
+    "category": "gpu",
+    "price": 779,
+    "stock": 5,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "gpu-rx7600",
+    "sku": "GPU-RX7600",
+    "name": "AMD Radeon RX 7600 8GB",
+    "category": "gpu",
+    "price": 345,
+    "stock": 9,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "gpu-rx7800xt",
+    "sku": "GPU-RX7800XT",
+    "name": "AMD Radeon RX 7800 XT 16GB",
+    "category": "gpu",
+    "price": 648,
+    "stock": 4,
+    "published": false,
+    "attributes": {}
+  },
+  {
+    "id": "cool-hyper212",
+    "sku": "COOL-HYPER212",
+    "name": "Cooler Master Hyper 212 Black air cooler",
+    "category": "cooling",
+    "price": 38,
+    "stock": 30,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "cool-lf2-240",
+    "sku": "COOL-LF2-240",
+    "name": "Arctic Liquid Freezer II 240mm AIO",
+    "category": "cooling",
+    "price": 121,
+    "stock": 10,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "cool-h150i-360",
+    "sku": "COOL-H150I-360",
+    "name": "Corsair iCUE H150i 360mm AIO",
+    "category": "cooling",
+    "price": 227,
+    "stock": 5,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "case-h510",
+    "sku": "CASE-H510",
+    "name": "NZXT H510 Mid Tower",
+    "category": "case",
+    "price": 93,
+    "stock": 9,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "case-lancool-216",
+    "sku": "CASE-LANCOOL216",
+    "name": "Lian Li LANCOOL 216 Mid Tower",
+    "category": "case",
+    "price": 136,
+    "stock": 7,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "case-pop-mini",
+    "sku": "CASE-POP-MINI",
+    "name": "Fractal Design Pop Mini Air",
+    "category": "case",
+    "price": 103,
+    "stock": 0,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "psu-w1-500",
+    "sku": "PSU-W1-500",
+    "name": "EVGA W1 500W 80+ White",
+    "category": "psu",
+    "price": 52,
+    "stock": 20,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "psu-cv550",
+    "sku": "PSU-CV550",
+    "name": "Corsair CV550 550W 80+ Bronze",
+    "category": "psu",
+    "price": 67,
+    "stock": 18,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "psu-rm750e",
+    "sku": "PSU-RM750E",
+    "name": "Corsair RM750e 750W 80+ Gold",
+    "category": "psu",
+    "price": 152,
+    "stock": 12,
+    "published": true,
+    "attributes": {}
+  },
+  {
+    "id": "psu-focus-850",
+    "sku": "PSU-FOCUS-850",
+    "name": "Seasonic Focus GX-850 850W 80+ Gold",
+    "category": "psu",
+    "price": 179,
+    "stock": 6,
+    "published": true,
+    "attributes": {}
+  }
+]

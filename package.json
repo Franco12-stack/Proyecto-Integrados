@@ -1,0 +1,21 @@
+{
+  "name": "pcforge",
+  "version": "1.0.0",
+  "description": "Wholesale-priced PC configurator: compatibility engine, price-list pricing and draft-order checkout that compensates a platform's built-in discount.",
+  "type": "module",
+  "main": "src/server/index.js",
+  "scripts": {
+    "start": "node src/server/index.js",
+    "dev": "node --watch src/server/index.js",
+    "test": "node --test",
+    "build:site": "node scripts/build-site.js",
+    "generate:data": "python3 scripts/generate-data.py"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "license": "MIT"
+}

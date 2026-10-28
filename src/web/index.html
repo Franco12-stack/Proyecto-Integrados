@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PCForge — wholesale-priced PC configurator (demo)</title>
+  <meta name="description" content="Demo: PC configurator with a compatibility engine, price-list pricing and a draft-order checkout.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%2338bdf8%27/%3E%3Cpath d=%27M9 22V10h8a4 4 0 010 8h-5%27 stroke=%27%2304121c%27 stroke-width=%273%27 fill=%27none%27/%3E%3C/svg%3E">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="./">PCForge<span class="badge">demo · fictional data</span></a>
+    <div id="mode" class="mode"></div>
+  </header>
+
+  <main class="layout">
+    <section>
+      <nav id="tabs" class="tabs" aria-label="Component categories"></nav>
+      <div class="toolbar">
+        <input id="search" type="search" placeholder="Search in this category…" aria-label="Search">
+        <label><input id="hideIncompatible" type="checkbox" checked> Hide incompatible</label>
+        <label><input id="includeHidden" type="checkbox" checked> Include products hidden from the storefront</label>
+      </div>
+      <div id="grid" class="grid"></div>
+    </section>
+
+    <aside class="summary" aria-label="Your build">
+      <h2>Your build</h2>
+      <div id="summary"></div>
+    </aside>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
